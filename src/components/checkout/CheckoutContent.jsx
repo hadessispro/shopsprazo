@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import CustomSelect from "@/components/ui/CustomSelect";
 import { useCart } from "@/context/CartContext";
 
 export default function CheckoutContent() {
@@ -9,7 +10,11 @@ export default function CheckoutContent() {
         firstName: "", lastName: "", company: "", country: "US",
         address: "", city: "", state: "", zip: "", phone: "", email: "", notes: ""
     });
-    const [paymentMethod, setPaymentMethod] = useState("card");
+    const [paymentMethod, setPaymentMethod] = useState("cod");
+    const [deliveryMethod, setDeliveryMethod] = useState("free");
+
+    const deliveryRate = deliveryMethod === "flat" ? 5.00 : 0.00;
+    const finalTotal = totalPrice + deliveryRate;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -128,7 +133,21 @@ export default function CheckoutContent() {
                                                         <span className="sp-bill-wrap sp-bill-half">
                                                             <label>City *</label>
                                                             <span className="sp-bl-select-inner">
-                                                                <input type="text" name="city" placeholder="City" value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} />
+                                                                <CustomSelect
+                                                                    options={[
+                                                                        { value: "", label: "City", disabled: true },
+                                                                        { value: "City 1", label: "City 1" },
+                                                                        { value: "City 2", label: "City 2" },
+                                                                        { value: "City 3", label: "City 3" },
+                                                                        { value: "City 4", label: "City 4" },
+                                                                        { value: "City 5", label: "City 5" }
+                                                                    ]}
+                                                                    value={formData.city}
+                                                                    onChange={(val) => setFormData({ ...formData, city: val })}
+                                                                    className="sp-bill-select hide-select"
+                                                                    name="gi_select_city"
+                                                                    defaultText="City"
+                                                                />
                                                             </span>
                                                         </span>
                                                         <span className="sp-bill-wrap sp-bill-half">
@@ -138,22 +157,42 @@ export default function CheckoutContent() {
                                                         <span className="sp-bill-wrap sp-bill-half">
                                                             <label>Country *</label>
                                                             <span className="sp-bl-select-inner">
-                                                                <div className="select">
-                                                                    <select name="gi_select_country" id="sp-select-country" className="sp-bill-select hide-select" value={formData.country} onChange={(e) => setFormData({ ...formData, country: e.target.value })}>
-                                                                        <option disabled>Country</option>
-                                                                        <option value="US">United States</option>
-                                                                        <option value="UK">United Kingdom</option>
-                                                                        <option value="CA">Canada</option>
-                                                                        <option value="AU">Australia</option>
-                                                                        <option value="VN">Vietnam</option>
-                                                                    </select>
-                                                                </div>
+                                                                <CustomSelect
+                                                                    options={[
+                                                                        { value: "", label: "Country", disabled: true },
+                                                                        { value: "US", label: "United States" },
+                                                                        { value: "UK", label: "United Kingdom" },
+                                                                        { value: "CA", label: "Canada" },
+                                                                        { value: "AU", label: "Australia" },
+                                                                        { value: "VN", label: "Vietnam" }
+                                                                    ]}
+                                                                    value={formData.country}
+                                                                    onChange={(val) => setFormData({ ...formData, country: val })}
+                                                                    className="sp-bill-select hide-select"
+                                                                    name="gi_select_country"
+                                                                    id="sp-select-country"
+                                                                    defaultText="Country"
+                                                                />
                                                             </span>
                                                         </span>
                                                         <span className="sp-bill-wrap sp-bill-half">
                                                             <label>Region State</label>
                                                             <span className="sp-bl-select-inner">
-                                                                <input type="text" name="state" placeholder="State/County" value={formData.state} onChange={(e) => setFormData({ ...formData, state: e.target.value })} />
+                                                                <CustomSelect
+                                                                    options={[
+                                                                        { value: "", label: "Region/State", disabled: true },
+                                                                        { value: "Region/State 1", label: "Region/State 1" },
+                                                                        { value: "Region/State 2", label: "Region/State 2" },
+                                                                        { value: "Region/State 3", label: "Region/State 3" },
+                                                                        { value: "Region/State 4", label: "Region/State 4" },
+                                                                        { value: "Region/State 5", label: "Region/State 5" }
+                                                                    ]}
+                                                                    value={formData.state}
+                                                                    onChange={(val) => setFormData({ ...formData, state: val })}
+                                                                    className="sp-bill-select hide-select"
+                                                                    name="gi_select_state"
+                                                                    defaultText="Region/State"
+                                                                />
                                                             </span>
                                                         </span>
                                                     </form>
@@ -186,7 +225,7 @@ export default function CheckoutContent() {
                                             </div>
                                             <div>
                                                 <span className="text-left">Delivery Charges</span>
-                                                <span className="text-right">$0.00</span>
+                                                <span className="text-right">${deliveryRate.toFixed(2)}</span>
                                             </div>
                                             <div>
                                                 <span className="text-left">Coupon Discount</span>
@@ -200,7 +239,7 @@ export default function CheckoutContent() {
                                             </div>
                                             <div className="sp-checkout-summary-total">
                                                 <span className="text-left">Total Amount</span>
-                                                <span className="text-right">${totalPrice.toFixed(2)}</span>
+                                                <span className="text-right">${finalTotal.toFixed(2)}</span>
                                             </div>
                                         </div>
                                         <div className="sp-checkout-pro">
@@ -251,12 +290,12 @@ export default function CheckoutContent() {
                                                 <span className="sp-del-option">
                                                     <span>
                                                         <span className="sp-del-opt-head">Free Shipping</span>
-                                                        <input type="radio" id="del1" name="radio-group" defaultChecked />
+                                                        <input type="radio" id="del1" name="delivery" checked={deliveryMethod === "free"} onChange={() => setDeliveryMethod("free")} />
                                                         <label htmlFor="del1">Rate - $0.00</label>
                                                     </span>
                                                     <span>
                                                         <span className="sp-del-opt-head">Flat Rate</span>
-                                                        <input type="radio" id="del2" name="radio-group" />
+                                                        <input type="radio" id="del2" name="delivery" checked={deliveryMethod === "flat"} onChange={() => setDeliveryMethod("flat")} />
                                                         <label htmlFor="del2">Rate - $5.00</label>
                                                     </span>
                                                 </span>
@@ -280,8 +319,12 @@ export default function CheckoutContent() {
                                             <form>
                                                 <span className="sp-pay-option m-b-15">
                                                     <span>
-                                                        <input type="radio" id="pay1" name="radio-group" defaultChecked />
+                                                        <input type="radio" id="pay1" name="payment" checked={paymentMethod === "cod"} onChange={() => setPaymentMethod("cod")} />
                                                         <label htmlFor="pay1">Cash On Delivery</label>
+                                                    </span>
+                                                    <span style={{ marginLeft: "15px" }}>
+                                                        <input type="radio" id="pay2" name="payment" checked={paymentMethod === "card"} onChange={() => setPaymentMethod("card")} />
+                                                        <label htmlFor="pay2">Credit/Debit Card</label>
                                                     </span>
                                                 </span>
                                                 <span className="sp-pay-commemt">

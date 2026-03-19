@@ -3,12 +3,23 @@ import { useState, useEffect } from "react";
 
 export default function BackToTop() {
     const [visible, setVisible] = useState(false);
+    const [progress, setProgress] = useState(307.919);
 
     useEffect(() => {
         const onScroll = () => {
-            setVisible(window.scrollY > 300);
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            setVisible(scrollTop > 50);
+
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            if (height > 0) {
+                const pathLength = 307.919;
+                const newProgress = pathLength - (scrollTop * pathLength) / height;
+                setProgress(newProgress);
+            }
         };
         window.addEventListener("scroll", onScroll);
+        // Initial check
+        onScroll();
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
@@ -22,6 +33,7 @@ export default function BackToTop() {
             className={`back-to-top ${visible ? "active-progress" : ""}`}
             onClick={(e) => { e.preventDefault(); scrollToTop(); }}
             title="Back to Top"
+            style={{ display: visible ? "block" : "none" }}
         >
             <i className="ri-arrow-up-double-fill"></i>
             <div className="back-to-top-wrap">
@@ -31,7 +43,7 @@ export default function BackToTop() {
                         style={{
                             transition: "stroke-dashoffset 10ms linear",
                             strokeDasharray: "307.919, 307.919",
-                            strokeDashoffset: "307.919"
+                            strokeDashoffset: progress
                         }}
                     ></path>
                 </svg>

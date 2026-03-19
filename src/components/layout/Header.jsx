@@ -4,11 +4,18 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import MobileMenu from "@/components/layout/MobileMenu";
+import CustomSelect from "@/components/ui/CustomSelect";
 
 export default function Header() {
     const [userDropdown, setUserDropdown] = useState(false);
     const [wishDropdown, setWishDropdown] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [locationDropdown, setLocationDropdown] = useState(false);
+    const [selectedLocation, setSelectedLocation] = useState("Surat");
+    const [langDropdown, setLangDropdown] = useState(false);
+    const [currencyDropdown, setCurrencyDropdown] = useState(false);
+    const [searchCategory, setSearchCategory] = useState("vegetables");
+
     const { totalItems, setIsCartOpen } = useCart();
     const { count: wishCount } = useWishlist();
 
@@ -32,8 +39,8 @@ export default function Header() {
                                     </div>
                                     <div className="cols">
                                         <div className="custom-dropdown">
-                                            <a className="sp-dropdown-toggle" href="#">Language</a>
-                                            <ul className="dropdown">
+                                            <a className="sp-dropdown-toggle" href="#!" onClick={(e) => { e.preventDefault(); setLangDropdown(!langDropdown); setCurrencyDropdown(false); }}>Language</a>
+                                            <ul className="dropdown" style={{ display: langDropdown ? "block" : "none" }}>
                                                 <li><a href="#!">English</a></li>
                                                 <li><a href="#!">Hindi</a></li>
                                                 <li><a href="#!">Gujarati</a></li>
@@ -42,8 +49,8 @@ export default function Header() {
                                     </div>
                                     <div className="cols">
                                         <div className="custom-dropdown">
-                                            <a className="sp-dropdown-toggle" href="#">Currency</a>
-                                            <ul className="dropdown">
+                                            <a className="sp-dropdown-toggle" href="#!" onClick={(e) => { e.preventDefault(); setCurrencyDropdown(!currencyDropdown); setLangDropdown(false); }}>Currency</a>
+                                            <ul className="dropdown" style={{ display: currencyDropdown ? "block" : "none" }}>
                                                 <li><a href="#!">USD $</a></li>
                                                 <li><a href="#!">EUR €</a></li>
                                             </ul>
@@ -85,12 +92,18 @@ export default function Header() {
                                     <div className="header-search">
                                         <form className="sp-btn-group-form">
                                             <div className="inner-select">
-                                                <select className="sp-search-category" defaultValue="fashion">
-                                                    <option value="fashion">Fashion</option>
-                                                    <option value="footwear">Footwear</option>
-                                                    <option value="cosmetics">Cosmetics</option>
-                                                    <option value="watches">Watches</option>
-                                                </select>
+                                                <CustomSelect
+                                                    options={[
+                                                        { value: "vegetables", label: "Vegetables" },
+                                                        { value: "dairy", label: "Dairy & Milk" },
+                                                        { value: "bakery", label: "Bakery" },
+                                                        { value: "fruits", label: "Fruits" },
+                                                        { value: "drinks", label: "Cold Drinks" }
+                                                    ]}
+                                                    value={searchCategory}
+                                                    onChange={setSearchCategory}
+                                                    className="sp-search-category hide-select"
+                                                />
                                             </div>
                                             <input className="form-control sp-search-bar" placeholder="Search products..." type="text" />
                                             <button className="submit" type="submit"><i className="ri-search-line"></i></button>
@@ -249,11 +262,11 @@ export default function Header() {
 
                                         {/* Categories Mega Menu */}
                                         <li className="nav-item sp-main-dropdown">
-                                            <span className="nav-link sp-dropdown-item cursor-pointer">Categories</span>
+                                            <a className="nav-link sp-dropdown-item" href="#!">Categories</a>
                                             <ul className="mega-menu">
                                                 <li>
                                                     <ul className="mega-block">
-                                                        <li className="menu_title"><span className="cursor-pointer">Classic</span></li>
+                                                        <li className="menu_title"><a href="#!">Classic</a></li>
                                                         <li><Link href="/shop?layout=left-3">Left sidebar 3 column</Link></li>
                                                         <li><Link href="/shop?layout=left-4">Left sidebar 4 column</Link></li>
                                                         <li><Link href="/shop?layout=right-3">Right sidebar 3 column</Link></li>
@@ -261,7 +274,7 @@ export default function Header() {
                                                         <li><Link href="/shop?layout=full">Full width 4 column</Link></li>
                                                     </ul>
                                                     <ul className="mega-block">
-                                                        <li className="menu_title"><span className="cursor-pointer">Banner</span></li>
+                                                        <li className="menu_title"><a href="#!">Banner</a></li>
                                                         <li><Link href="/shop/banner?layout=left-3">left sidebar 3 column</Link></li>
                                                         <li><Link href="/shop/banner?layout=left-4">left sidebar 4 column</Link></li>
                                                         <li><Link href="/shop/banner?layout=right-3">right sidebar 3 column</Link></li>
@@ -269,7 +282,7 @@ export default function Header() {
                                                         <li><Link href="/shop/banner?layout=full">Full width 4 column</Link></li>
                                                     </ul>
                                                     <ul className="mega-block">
-                                                        <li className="menu_title"><span className="cursor-pointer">Columns</span></li>
+                                                        <li className="menu_title"><a href="#!">Columns</a></li>
                                                         <li><Link href="/shop?layout=full-3">3 Columns full width</Link></li>
                                                         <li><Link href="/shop?layout=full-4">4 Columns full width</Link></li>
                                                         <li><Link href="/shop?layout=full-5">5 Columns full width</Link></li>
@@ -277,7 +290,7 @@ export default function Header() {
                                                         <li><Link href="/shop/banner?layout=full-3">Banner 3 Columns</Link></li>
                                                     </ul>
                                                     <ul className="mega-block">
-                                                        <li className="menu_title"><span className="cursor-pointer">List</span></li>
+                                                        <li className="menu_title"><a href="#!">List</a></li>
                                                         <li><Link href="/shop/list?layout=left">Shop left sidebar</Link></li>
                                                         <li><Link href="/shop/list?layout=right">Shop right sidebar</Link></li>
                                                         <li><Link href="/shop/list/banner?layout=left">Banner left sidebar</Link></li>
@@ -290,17 +303,17 @@ export default function Header() {
 
                                         {/* Products */}
                                         <li className="nav-item sp-dropdown">
-                                            <span className="nav-link sp-dropdown-item cursor-pointer">Products</span>
+                                            <a className="nav-link sp-dropdown-item" href="#!">Products</a>
                                             <ul className="sp-dropdown-menu">
                                                 <li className="sp-mega-dropdown">
-                                                    <span className="sp-mega-item cursor-pointer">Product page <i className="ri-arrow-right-s-line"></i></span>
+                                                    <a className="sp-mega-item" href="#!">Product page</a>
                                                     <ul className="sp-mega-menu">
                                                         <li><Link className="dropdown-item" href="/product/1?layout=left">Product left sidebar</Link></li>
                                                         <li><Link className="dropdown-item" href="/product/1?layout=right">Product right sidebar</Link></li>
                                                     </ul>
                                                 </li>
                                                 <li className="sp-mega-dropdown">
-                                                    <span className="sp-mega-item cursor-pointer">Product Gallery <i className="ri-arrow-right-s-line"></i></span>
+                                                    <a className="sp-mega-item" href="#!">Product Gallery</a>
                                                     <ul className="sp-mega-menu">
                                                         <li><Link className="dropdown-item" href="/product/1/gallery?layout=left">left sidebar</Link></li>
                                                         <li><Link className="dropdown-item" href="/product/1/gallery?layout=right">right sidebar</Link></li>
@@ -313,7 +326,7 @@ export default function Header() {
 
                                         {/* Pages */}
                                         <li className="nav-item sp-dropdown">
-                                            <span className="nav-link sp-dropdown-item cursor-pointer">Pages</span>
+                                            <a className="nav-link sp-dropdown-item" href="#!">Pages</a>
                                             <ul className="sp-dropdown-menu">
                                                 <li><Link className="dropdown-item" href="/about">About Us <span className="lbl">new</span></Link></li>
                                                 <li><Link className="dropdown-item" href="/contact">Contact Us</Link></li>
@@ -328,7 +341,7 @@ export default function Header() {
 
                                         {/* Blog */}
                                         <li className="nav-item sp-dropdown">
-                                            <span className="nav-link sp-dropdown-item cursor-pointer">Blog</span>
+                                            <a className="nav-link sp-dropdown-item" href="#!">Blog</a>
                                             <ul className="sp-dropdown-menu">
                                                 <li><Link className="dropdown-item" href="/blog?layout=left">Left Sidebar</Link></li>
                                                 <li><Link className="dropdown-item" href="/blog?layout=right">Right Sidebar</Link></li>
@@ -351,7 +364,7 @@ export default function Header() {
                                     </ul>
                                 </div>
 
-                                {/* Location Select */}
+                                {/* Location Dropdown - matches HTML: sp-dropdown-menu > inner-select > svg + custom-select */}
                                 <div className="sp-dropdown-menu">
                                     <div className="inner-select">
                                         <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -360,16 +373,17 @@ export default function Header() {
                                                 <path d="m15.5 11c0 1.933-1.567 3.5-3.5 3.5s-3.5-1.567-3.5-3.5 1.567-3.5 3.5-3.5 3.5 1.567 3.5 3.5z"></path>
                                             </g>
                                         </svg>
-                                        <div className="custom-select">
-                                            <div className="select">
-                                                <select className="hide-select">
-                                                    <option value="option1">Surat</option>
-                                                    <option value="option2">Delhi</option>
-                                                    <option value="option3">Rajkot</option>
-                                                    <option value="option4">Udaipur</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        <CustomSelect
+                                            options={[
+                                                { value: "Surat", label: "Surat" },
+                                                { value: "Delhi", label: "Delhi" },
+                                                { value: "Rajkot", label: "Rajkot" },
+                                                { value: "Udaipur", label: "Udaipur" }
+                                            ]}
+                                            value={selectedLocation}
+                                            onChange={setSelectedLocation}
+                                            wrapperType="select"
+                                        />
                                     </div>
                                 </div>
                             </div>

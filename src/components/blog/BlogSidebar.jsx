@@ -48,22 +48,37 @@ export default function BlogSidebar() {
                         <ul>
                             <li>
                                 <div className="sp-sidebar-block-item">
-                                    <input type="checkbox" /> <Link href="/blog">Fashion<span title="Products">- 12</span></Link><span className="checked"></span>
+                                    <input type="checkbox" /> <Link href="/blog">Dairy &amp; Milk<span title="Products">- 68</span></Link><span className="checked"></span>
                                 </div>
                             </li>
                             <li>
                                 <div className="sp-sidebar-block-item">
-                                    <input type="checkbox" /> <Link href="/blog">Style<span title="Products">- 8</span></Link><span className="checked"></span>
+                                    <input type="checkbox" /> <Link href="/blog">Seafood<span title="Products">- 58</span></Link><span className="checked"></span>
                                 </div>
                             </li>
                             <li>
                                 <div className="sp-sidebar-block-item">
-                                    <input type="checkbox" /> <Link href="/blog">Tips<span title="Products">- 5</span></Link><span className="checked"></span>
+                                    <input type="checkbox" /> <Link href="/blog">Bakery<span title="Products">- 84</span></Link><span className="checked"></span>
                                 </div>
                             </li>
                             <li>
                                 <div className="sp-sidebar-block-item">
-                                    <input type="checkbox" /> <Link href="/blog">Lifestyle<span title="Products">- 10</span></Link><span className="checked"></span>
+                                    <input type="checkbox" /> <Link href="/blog">Cosmetics<span title="Products">- 63</span></Link><span className="checked"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="sp-sidebar-block-item">
+                                    <input type="checkbox" /> <Link href="/blog">Electrics<span title="Products">- 75</span></Link><span className="checked"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="sp-sidebar-block-item">
+                                    <input type="checkbox" /> <Link href="/blog">Clothes<span title="Products">- 39</span></Link><span className="checked"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="sp-sidebar-block-item">
+                                    <input type="checkbox" /> <Link href="/blog">Watch<span title="Products">- 48</span></Link><span className="checked"></span>
                                 </div>
                             </li>
                         </ul>

@@ -3,3 +3,133 @@
 
 /* === Next.js Overrides === */
 /* Fix for Next.js default box-sizing conflicts */
+
+/* ===================================================
+   RECENT PURCHASE POPUP (sp-recent)
+   =================================================== */
+.sp-recent {
+    position: fixed;
+    bottom: 30px;
+    left: -320px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+    max-width: 290px;
+    transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto;
+}
+
+.sp-recent.sp-recent-show {
+    left: 20px;
+}
+
+.sp-recent img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.sp-recent .detail {
+    flex: 1;
+}
+
+.sp-recent .detail p {
+    margin: 0;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.4;
+}
+
+.sp-recent .detail p.bought {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 2px;
+}
+
+.sp-recent .detail h6 {
+    margin: 2px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+}
+
+.sp-recent .recent-close {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    font-size: 18px;
+    line-height: 1;
+    color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.sp-recent .recent-close:hover {
+    color: #333;
+}
+
+/* ===================================================
+   BLOG DETAIL – Image Reveal Effect (reveal-wrapper / reveal-mask)
+   =================================================== */
+.reveal-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    display: block;
+}
+
+.reveal-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.reveal-wrapper:hover img {
+    transform: scale(1.07);
+}
+
+/* The mask: initially covers the image fully */
+.reveal-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #5ab963;
+    transform: translateX(0%);
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.18, 1);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* When in-view: slide mask out to the right */
+.reveal-wrapper.in-view .reveal-mask {
+    transform: translateX(101%);
+}
+
+/* After animation completes (revealed class): completely remove mask */
+.reveal-wrapper.revealed .reveal-mask {
+    display: none;
+}
+
+/* sub-img spacing */
+.sub-img {
+    margin: 30px 0;
+}
+
+.sub-img .col-md-6 {
+    padding: 0 8px;
+}

@@ -1,8 +1,12 @@
 "use client";
+import React, { useState } from "react";
 import Link from "next/link";
+import CustomSelect from "@/components/ui/CustomSelect";
 import { useCart } from "@/context/CartContext";
 
 export default function CartContent() {
+    const [country, setCountry] = useState("US");
+    const [state, setState] = useState("");
     const { items, updateQty, removeItem, totalItems, totalPrice, clearCart } = useCart();
 
     return (
@@ -109,27 +113,42 @@ export default function CartContent() {
                                                         <span className="sp-cart-wrap">
                                                             <label>Country *</label>
                                                             <span className="sp-cart-select-inner">
-                                                                <select name="gi_cart_country" id="sp-cart-select-country" className="sp-cart-select form-control">
-                                                                    <option defaultValue>United States</option>
-                                                                    <option value="1">Country 1</option>
-                                                                    <option value="2">Country 2</option>
-                                                                    <option value="3">Country 3</option>
-                                                                    <option value="4">Country 4</option>
-                                                                    <option value="5">Country 5</option>
-                                                                </select>
+                                                                <CustomSelect
+                                                                    options={[
+                                                                        { value: "US", label: "United States" },
+                                                                        { value: "1", label: "Country 1" },
+                                                                        { value: "2", label: "Country 2" },
+                                                                        { value: "3", label: "Country 3" },
+                                                                        { value: "4", label: "Country 4" },
+                                                                        { value: "5", label: "Country 5" }
+                                                                    ]}
+                                                                    value={country}
+                                                                    onChange={setCountry}
+                                                                    className="sp-cart-select form-control hide-select"
+                                                                    name="gi_cart_country"
+                                                                    id="sp-cart-select-country"
+                                                                />
                                                             </span>
                                                         </span>
                                                         <span className="sp-cart-wrap">
                                                             <label>State/Province</label>
                                                             <span className="sp-cart-select-inner">
-                                                                <select name="gi_cart_state" id="sp-cart-select-state" className="sp-cart-select form-control">
-                                                                    <option defaultValue>Please Select a region, state</option>
-                                                                    <option value="1">Region/State 1</option>
-                                                                    <option value="2">Region/State 2</option>
-                                                                    <option value="3">Region/State 3</option>
-                                                                    <option value="4">Region/State 4</option>
-                                                                    <option value="5">Region/State 5</option>
-                                                                </select>
+                                                                <CustomSelect
+                                                                    options={[
+                                                                        { value: "", label: "Please Select a region, state", disabled: true },
+                                                                        { value: "1", label: "Region/State 1" },
+                                                                        { value: "2", label: "Region/State 2" },
+                                                                        { value: "3", label: "Region/State 3" },
+                                                                        { value: "4", label: "Region/State 4" },
+                                                                        { value: "5", label: "Region/State 5" }
+                                                                    ]}
+                                                                    value={state}
+                                                                    onChange={setState}
+                                                                    className="sp-cart-select form-control hide-select"
+                                                                    name="gi_cart_state"
+                                                                    id="sp-cart-select-state"
+                                                                    defaultText="Please Select a region, state"
+                                                                />
                                                             </span>
                                                         </span>
                                                         <span className="sp-cart-wrap">

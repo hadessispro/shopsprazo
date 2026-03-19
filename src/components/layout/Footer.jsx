@@ -1,12 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Footer() {
     const [openWidget, setOpenWidget] = useState(null);
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    useEffect(() => {
+        const checkDesktop = () => setIsDesktop(window.innerWidth > 991);
+        checkDesktop();
+        window.addEventListener('resize', checkDesktop);
+        return () => window.removeEventListener('resize', checkDesktop);
+    }, []);
 
     const toggleWidget = (widgetName) => {
-        if (window.innerWidth <= 991) {
+        if (!isDesktop) {
             setOpenWidget(openWidget === widgetName ? null : widgetName);
         }
     };
@@ -42,7 +50,7 @@ export default function Footer() {
                                     >
                                         Category<div className="sp-heading-res"><i className="ri-arrow-down-s-line"></i></div>
                                     </h4>
-                                    <div className="sp-footer-links sp-footer-dropdown" style={{ display: openWidget === 'category' || (typeof window !== 'undefined' && window.innerWidth > 991) ? 'block' : '' }}>
+                                    <div className="sp-footer-links sp-footer-dropdown" style={{ display: openWidget === 'category' || isDesktop ? 'block' : '' }}>
                                         <ul className="align-items-center">
                                             <li className="sp-footer-link">
                                                 <Link href="/shop">Dairy &amp; Milk</Link>
@@ -75,7 +83,7 @@ export default function Footer() {
                                     >
                                         Company<div className="sp-heading-res"><i className="ri-arrow-down-s-line"></i></div>
                                     </h4>
-                                    <div className="sp-footer-links sp-footer-dropdown" style={{ display: openWidget === 'company' || (typeof window !== 'undefined' && window.innerWidth > 991) ? 'block' : '' }}>
+                                    <div className="sp-footer-links sp-footer-dropdown" style={{ display: openWidget === 'company' || isDesktop ? 'block' : '' }}>
                                         <ul className="align-items-center">
                                             <li className="sp-footer-link">
                                                 <Link href="/about">About us</Link>
@@ -108,7 +116,7 @@ export default function Footer() {
                                     >
                                         Account<div className="sp-heading-res"><i className="ri-arrow-down-s-line"></i></div>
                                     </h4>
-                                    <div className="sp-footer-links sp-footer-dropdown" style={{ display: openWidget === 'account' || (typeof window !== 'undefined' && window.innerWidth > 991) ? 'block' : '' }}>
+                                    <div className="sp-footer-links sp-footer-dropdown" style={{ display: openWidget === 'account' || isDesktop ? 'block' : '' }}>
                                         <ul className="align-items-center">
                                             <li className="sp-footer-link">
                                                 <Link href="/login">Sign In</Link>
@@ -142,7 +150,7 @@ export default function Footer() {
                                         >
                                             Contact<div className="sp-heading-res"><i className="ri-arrow-down-s-line"></i></div>
                                         </h4>
-                                        <div className="sp-footer-links sp-footer-dropdown" style={{ display: openWidget === 'contact' || (typeof window !== 'undefined' && window.innerWidth > 991) ? 'block' : '' }}>
+                                        <div className="sp-footer-links sp-footer-dropdown" style={{ display: openWidget === 'contact' || isDesktop ? 'block' : '' }}>
                                             <ul className="align-items-center">
                                                 <li className="sp-footer-link sp-foo-location">
                                                     <span className="mt-15px">

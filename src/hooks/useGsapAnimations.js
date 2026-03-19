@@ -47,6 +47,31 @@ export function useGsapAnimations() {
                 );
             });
 
+            // 3. Blog Image Reveal Animation (.reveal-mask)
+            const revealWrappers = gsap.utils.toArray(".reveal-wrapper");
+            revealWrappers.forEach((wrapper) => {
+                const mask = wrapper.querySelector(".reveal-mask");
+                if (!mask) return;
+
+                // Set initial state: mask covers image
+                gsap.set(mask, { xPercent: 0 });
+
+                // On scroll, slide mask out to the right to reveal blog image
+                gsap.to(mask, {
+                    xPercent: 100,
+                    duration: 1.2,
+                    ease: "power3.inOut",
+                    onComplete: () => {
+                        wrapper.classList.add("revealed");
+                    },
+                    scrollTrigger: {
+                        trigger: wrapper,
+                        start: "top 85%",
+                        toggleActions: "play none none none",
+                    }
+                });
+            });
+
             // 3. Parallax Banner Animation (.sp-banner-block)
             const banners = gsap.utils.toArray(".sp-banner-block");
             banners.forEach((banner) => {

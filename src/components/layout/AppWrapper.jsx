@@ -8,6 +8,7 @@ import SideCart from "@/components/cart/SideCart";
 import BackToTop from "@/components/layout/BackToTop";
 import ToolsSidebar from "@/components/layout/ToolsSidebar";
 import CategoryPopup from "@/components/layout/CategoryPopup";
+import SalePopup from "@/components/layout/SalePopup";
 import Loader from "@/components/layout/Loader";
 import { useGsapAnimations } from "@/hooks/useGsapAnimations";
 
@@ -26,6 +27,7 @@ export default function AppWrapper({ children }) {
                     <SideCart />
                     <BackToTop />
                     <ToolsSidebar />
+                    <SalePopup />
                 </WishlistProvider>
             </CartProvider>
         </ThemeProvider>

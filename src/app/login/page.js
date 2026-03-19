@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata = {
     title: "Login - Sprazo",
@@ -8,15 +9,16 @@ export const metadata = {
 export default function LoginPage() {
     return (
         <>
-            <section className="sp-breadcrumb-2">
+            <section className="sp-breadcrumb margin-b-50">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <div className="sp-breadcrumb-detail">
-                                <h2 data-cursor="big">Login</h2>
+                            <div className="sp-breadcrumb-inner">
+                                <h2 className="sp-breadcrumb-title">Login Page</h2>
                                 <ul className="sp-breadcrumb-list">
-                                    <li><Link href="/">Home</Link></li>
-                                    <li>Login</li>
+                                    <li className="sp-breadcrumb-item"><Link href="/">Home</Link></li>
+                                    <li><i className="ri-arrow-right-double-fill"></i></li>
+                                    <li className="sp-breadcrumb-item active">Login Page</li>
                                 </ul>
                             </div>
                         </div>
@@ -24,36 +26,50 @@ export default function LoginPage() {
                 </div>
             </section>
 
-            <section className="sp-login-page p-tb-50">
+            <section className="sp-login padding-tb-50">
                 <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-lg-5 col-md-8 col-12">
-                            <div className="sp-auth-block border p-4 bg-light rounded login-form h-100">
-                                <div className="sp-auth-title text-center mb-4">
-                                    <h3>Log In</h3>
-                                    <p className="text-muted">Welcome back! Please login to your account.</p>
+                    <div className="row">
+                        <div className="section-detail centerd">
+                            <div className="sp-title">
+                                <p><img src="/fonts/15.svg" alt="" />Login</p>
+                                <h2 data-cursor="big">Get access to your Orders, Wishlist and Recommendations</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="sp-login-content" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <div className="sp-login-box">
+                            <div className="sp-login-wrapper">
+                                <div className="sp-login-container">
+                                    <div className="sp-login-form">
+                                        <form>
+                                            <span className="sp-login-wrap">
+                                                <label>Email Address*</label>
+                                                <input type="text" name="name" placeholder="Enter your email..." required />
+                                            </span>
+                                            <span className="sp-login-wrap">
+                                                <label>Password*</label>
+                                                <input type="password" name="password" placeholder="Enter your password" required />
+                                            </span>
+                                            <span className="sp-login-wrap sp-login-fp">
+                                                <span className="sp-remember">
+                                                    <input type="checkbox" value="" />
+                                                    Remember
+                                                    <span className="checked"></span>
+                                                </span>
+                                                <label><Link href="/forgot">Forgot Password?</Link></label>
+                                            </span>
+                                            <span className="sp-login-wrap sp-login-btn">
+                                                <span><Link href="/register">Create Account?</Link></span>
+                                                <button className="sp-btn-1 btn" type="submit"><span>Login</span></button>
+                                            </span>
+                                        </form>
+                                    </div>
                                 </div>
-                                <form>
-                                    <div className="form-group mb-3">
-                                        <label>Email Address *</label>
-                                        <input type="email" className="form-control" placeholder="Enter your email" required />
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <label>Password *</label>
-                                        <input type="password" className="form-control" placeholder="Enter your password" required />
-                                    </div>
-                                    <div className="form-group mb-4 d-flex justify-content-between align-items-center">
-                                        <div className="form-check">
-                                            <input type="checkbox" className="form-check-input" id="remember" />
-                                            <label className="form-check-label" htmlFor="remember">Remember me</label>
-                                        </div>
-                                        <a href="#" className="font-weight-bold text-primary">Forgot Password?</a>
-                                    </div>
-                                    <button type="submit" className="sp-btn-1 w-100 mt-2">Log In</button>
-                                </form>
-                                <div className="sp-auth-footer text-center mt-4 pt-3 border-top">
-                                    <p className="mb-0">Don't have an account? <Link href="/register" className="font-weight-bold text-primary">Sign up here</Link></p>
-                                </div>
+                            </div>
+                        </div>
+                        <div className="sp-login-box d-n-991">
+                            <div className="sp-login-img">
+                                <img src="/images/1_7.jpg" alt="login" />
                             </div>
                         </div>
                     </div>

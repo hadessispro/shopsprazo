@@ -3,6 +3,7 @@ import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ProductCard from "@/components/product/ProductCard";
 import ShopSidebar from "@/components/shop/ShopSidebar";
+import CustomSelect from "@/components/ui/CustomSelect";
 import { products } from "@/data/mockData";
 import Link from "next/link";
 
@@ -85,16 +86,17 @@ export default function ShopContent() {
                                     </button>
                                 </div>
                                 <div className="sp-sort-by">
-                                    <select
-                                        className="form-select"
+                                    <CustomSelect
+                                        options={[
+                                            { value: "default", label: "Default Sorting" },
+                                            { value: "price-low", label: "Price: Low to High" },
+                                            { value: "price-high", label: "Price: High to Low" },
+                                            { value: "name", label: "Name: A to Z" }
+                                        ]}
                                         value={sortBy}
-                                        onChange={(e) => setSortBy(e.target.value)}
-                                    >
-                                        <option value="default">Default Sorting</option>
-                                        <option value="price-low">Price: Low to High</option>
-                                        <option value="price-high">Price: High to Low</option>
-                                        <option value="name">Name: A to Z</option>
-                                    </select>
+                                        onChange={setSortBy}
+                                        className="form-select hide-select"
+                                    />
                                 </div>
                             </div>
 

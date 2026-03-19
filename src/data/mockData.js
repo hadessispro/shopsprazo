@@ -1,6 +1,15 @@
 // Mock product data for the Sprazo template
 export const products = [
-    { id: 1, name: "leather purse for women", category: "purse", price: 264, oldPrice: 300, image: "/images/36.jpg", hoverImage: "/images/37.jpg", rating: 4, badge: "New", sizes: "M, L", colors: ["#ecc4bd", "#7290f1"] },
+    // --- Grocery / Fruits / Vegetables ---
+    { id: 1, name: "Fresh and organic best quality Pomegranate pack", category: "Fruits", price: 150, oldPrice: 299, image: "/images/30_1.jpg", hoverImage: "/images/31_1.jpg", images: ["/images/30_1.jpg", "/images/31_1.jpg", "/images/32_1.jpg", "/images/33_1.jpg", "/images/34_1.jpg", "/images/35_1.jpg"], sku: "SP5874", rating: 4, badge: "-50%" },
+    { id: 12, name: "Organic fresh spinach leaves 500g", category: "Vegetables", price: 35, oldPrice: 50, image: "/images/30_1.jpg", hoverImage: "/images/31_1.jpg", images: ["/images/30_1.jpg", "/images/31_1.jpg"], sku: "SP5875", rating: 5, badge: "New" },
+    { id: 13, name: "Red cherry tomatoes premium quality", category: "Vegetables", price: 48, oldPrice: 65, image: "/images/32_1.jpg", hoverImage: "/images/33_1.jpg", images: ["/images/32_1.jpg", "/images/33_1.jpg"], sku: "SP5876", rating: 4, badge: null },
+    { id: 14, name: "Sweet mango tropical fresh fruit", category: "Fruits", price: 90, oldPrice: 120, image: "/images/34_1.jpg", hoverImage: "/images/35_1.jpg", images: ["/images/34_1.jpg", "/images/35_1.jpg"], sku: "SP5877", rating: 5, badge: "Hot" },
+    { id: 15, name: "Fresh broccoli bunch organic farm", category: "Vegetables", price: 42, oldPrice: 58, image: "/images/30_1.jpg", hoverImage: "/images/31_1.jpg", images: ["/images/30_1.jpg", "/images/31_1.jpg"], sku: "SP5878", rating: 3, badge: "-25%" },
+    { id: 16, name: "Whole grain artisan bread loaf", category: "Bakery", price: 28, oldPrice: 35, image: "/images/32_1.jpg", hoverImage: "/images/33_1.jpg", images: ["/images/32_1.jpg", "/images/33_1.jpg"], sku: "SP5879", rating: 4, badge: null },
+    { id: 17, name: "Mixed seasonal vegetable basket", category: "Vegetables", price: 120, oldPrice: 160, image: "/images/34_1.jpg", hoverImage: "/images/35_1.jpg", images: ["/images/34_1.jpg", "/images/35_1.jpg"], sku: "SP5880", rating: 5, badge: "sale" },
+    // --- Fashion / Clothing / Accessories ---
+    { id: 11, name: "leather purse for women", category: "purse", price: 264, oldPrice: 300, image: "/images/36.jpg", hoverImage: "/images/37.jpg", rating: 4, badge: "New", sizes: "M, L", colors: ["#ecc4bd", "#7290f1"] },
     { id: 2, name: "sport shoes for women", category: "shoes", price: 159, oldPrice: 180, image: "/images/75.jpg", hoverImage: "/images/76.jpg", rating: 5, badge: null, sizes: "8, 9, 10", colors: ["#333", "#ecc4bd"] },
     { id: 3, name: "dress for women party wear", category: "dress", price: 11, oldPrice: 15, image: "/images/90_1.jpg", hoverImage: "/images/91.jpg", rating: 3, badge: "sale", sizes: "S, M, L", colors: ["#ecc4bd", "#7290f1"] },
     { id: 4, name: "sandals for women flat", category: "sandals", price: 25, oldPrice: null, image: "/images/64.jpg", hoverImage: "/images/65.jpg", rating: 2, badge: "sale", sizes: "8, 9, 10", colors: ["#ecc4bd", "#7290f1"] },
@@ -43,9 +52,70 @@ export const heroSlides = [
 ];
 
 export const blogPosts = [
-    { id: 1, title: "The Best Street Style From Fashion Week", date: "January 15, 2024", image: "/images/8_1.jpg", excerpt: "Discover the latest fashion trends from the street style scene.", category: "Fashion" },
-    { id: 2, title: "Top 10 Summer Outfits For 2024", date: "February 20, 2024", image: "/images/9.jpg", excerpt: "Get ready for summer with these amazing outfit ideas.", category: "Style" },
-    { id: 3, title: "How To Style Your Winter Wardrobe", date: "March 10, 2024", image: "/images/10.jpg", excerpt: "Winter doesn't mean boring clothes. Here are tips to stay stylish.", category: "Tips" },
+    {
+        id: 1,
+        title: "Beginner's Guide to Eating More Vegetables Without Even Trying.",
+        date: "February 4, 2026",
+        image: "/images/blog/1.jpg",
+        excerpt: "A vibrant corner of the web dedicated to all things vegetable from garden to table. Whether you're a seasoned grower, curious cook, or veggie newbie, you'll find tips, recipes, and green inspiration to nourish your body and your lifestyle.",
+        category: "Vegetables"
+    },
+    {
+        id: 2,
+        title: "Tech in Trolleys: Smart Innovations in Bakery Shopping.",
+        date: "May 12, 2025",
+        image: "/images/blog/2.jpg",
+        excerpt: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
+        category: "Bakery"
+    },
+    {
+        id: 3,
+        title: "Freshly Squeezed: The Latest News in the Juice Industry.",
+        date: "June 22, 2027",
+        image: "/images/blog/3.jpg",
+        excerpt: "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.",
+        category: "Drinks"
+    },
+    {
+        id: 4,
+        title: "Fresh Picks: Seasonal Fruit Trends You Need to Know.",
+        date: "December 19, 2026",
+        image: "/images/blog/4.jpg",
+        excerpt: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage.",
+        category: "Fruits"
+    },
+    {
+        id: 5,
+        title: "Confessions of a Pickle Addict: Tales from the Briny Deep.",
+        date: "September 22, 2025",
+        image: "/images/blog/5.jpg",
+        excerpt: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage.",
+        category: "Pickles"
+    },
+    {
+        id: 6,
+        title: "Sweet, Sour & Surprising: A Journey Into the World of Pickled Fruits.",
+        date: "November 05, 2027",
+        image: "/images/blog/6.jpg",
+        excerpt: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage.",
+        category: "Fruits"
+    },
+    {
+        id: 7,
+        title: "The best fashion influencers.",
+        date: "February 10, 2025",
+        image: "/images/blog/7.jpg",
+        excerpt: "A look at the top food and lifestyle influencers making waves in the organic and grocery world this season.",
+        category: "Organic"
+    },
+    {
+        id: 8,
+        title: "Vogue Shopping Weekend.",
+        date: "March 14, 2025",
+        image: "/images/blog/8.jpg",
+        excerpt: "Discover the freshest picks from the weekend grocery and farmer's market haul you don't want to miss.",
+        category: "Fruits"
+    },
 ];
 
 export const labelItems = [

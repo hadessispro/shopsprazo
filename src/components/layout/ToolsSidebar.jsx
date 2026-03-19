@@ -1,7 +1,9 @@
 "use client";
+import { useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function ToolsSidebar() {
+    const [isOpen, setIsOpen] = useState(false);
     const { colorTheme, setColorTheme, mode, setMode, direction, setDirection, boxLayout, setBoxLayout } = useTheme();
 
     const colors = [
@@ -11,14 +13,14 @@ export default function ToolsSidebar() {
 
     return (
         <>
-            <div className="sp-tools-sidebar-overlay" data-cursor="hide"></div>
-            <div className="sp-tools-sidebar">
-                <a href="#!" className="sp-tools-sidebar-toggle in-out">
+            <div className={`sp-tools-sidebar-overlay ${isOpen ? "active" : ""}`} data-cursor="hide" onClick={() => setIsOpen(false)} style={{ display: isOpen ? "block" : "none" }}></div>
+            <div className={`sp-tools-sidebar ${isOpen ? "open-tools" : ""}`}>
+                <a href="#!" className="sp-tools-sidebar-toggle in-out" onClick={(e) => { e.preventDefault(); setIsOpen(true); }} style={{ display: isOpen ? "none" : "" }}>
                     <i className="ri-settings-3-line"></i>
                 </a>
                 <div className="sp-bar-title">
                     <h6>Tools</h6>
-                    <a href="#" className="close-tools"><i className="ri-close-line"></i></a>
+                    <a href="#!" className="close-tools" onClick={(e) => { e.preventDefault(); setIsOpen(false); }}><i className="ri-close-line"></i></a>
                 </div>
                 <div className="sp-tools-detail">
                     {/* Color Selection */}

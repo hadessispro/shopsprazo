@@ -13,14 +13,44 @@
 ▲ Next.js 16.1.6 (Turbopack)
 
   Creating an optimized production build ...
-✓ Compiled successfully in 4.1s
+✓ Compiled successfully in 3.8s
   Running TypeScript ...
   Collecting page data using 15 workers ...
   Generating static pages using 15 workers (0/24) ...
-Error occurred prerendering page "/checkout". Read more: https://nextjs.org/docs/messages/prerender-error
-ReferenceError: CustomSelect is not defined
-    at f (C:\Users\thaibao\Documents\crawlerwebsite\sprazo-nextjs\.next\server\chunks\ssr\c6975_sprazo-nextjs_src_components_checkout_CheckoutContent_jsx_5ea3101d._.js:1:5577) {
-  digest: '2690918832'
-}
-Export encountered an error on /checkout/page: /checkout, exiting the build.
-⨯ Next.js build worker exited with code: 1 and signal: null
+  Generating static pages using 15 workers (6/24) 
+  Generating static pages using 15 workers (12/24) 
+  Generating static pages using 15 workers (18/24) 
+✓ Generating static pages using 15 workers (24/24) in 1204.6ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /about
+├ ○ /blog
+├ ƒ /blog/[id]
+├ ○ /cart
+├ ○ /checkout
+├ ○ /compare
+├ ○ /contact
+├ ○ /faq
+├ ○ /forgot
+├ ○ /grocery
+├ ○ /login
+├ ○ /offer
+├ ○ /offers
+├ ƒ /product/[id]
+├ ƒ /product/[id]/gallery
+├ ○ /register
+├ ○ /shop
+├ ○ /shop/banner
+├ ○ /shop/list
+├ ○ /shop/list/banner
+├ ○ /terms
+├ ○ /track-order
+└ ○ /wishlist
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -13,15 +13,16 @@ export default function WishlistContent() {
 
     return (
         <>
-            <section className="sp-breadcrumb-2">
-                <div className="container">
+            <section className="sp-breadcrumb-2 margin-b-50">
+                <div className="container-fluid">
                     <div className="row">
                         <div className="col-12">
-                            <div className="sp-breadcrumb-detail">
-                                <h2 data-cursor="big">Wishlist</h2>
+                            <div className="sp-breadcrumb-inner">
+                                <h2 data-cursor="big" className="sp-breadcrumb-title">Wishlist Page</h2>
                                 <ul className="sp-breadcrumb-list">
-                                    <li><Link href="/">Home</Link></li>
-                                    <li>Wishlist</li>
+                                    <li className="sp-breadcrumb-item"><Link href="/">Home</Link></li>
+                                    <li><i className="ri-arrow-right-double-fill"></i></li>
+                                    <li className="sp-breadcrumb-item active">Wishlist Page</li>
                                 </ul>
                             </div>
                         </div>
@@ -29,61 +30,82 @@ export default function WishlistContent() {
                 </div>
             </section>
 
-            <section className="sp-wishlist-page p-tb-50">
+            <section className="sp-wishlist-list padding-tb-50">
                 <div className="container">
-                    <div className="row">
-                        {items.length === 0 ? (
-                            <div className="col-12 text-center py-5">
-                                <i className="ri-heart-line text-muted mb-4" style={{ fontSize: "5rem" }}></i>
-                                <h3 className="mb-3">Your wishlist is currently empty.</h3>
-                                <p className="text-muted mb-4">Add your favorite items to your wishlist to easily find them later.</p>
-                                <Link href="/shop" className="sp-btn-1">Return To Shop</Link>
-                            </div>
-                        ) : (
-                            <div className="col-12">
-                                <div className="table-responsive sp-wishlist-table-group">
-                                    <table className="table table-bordered sp-wishlist-table">
-                                        <thead>
-                                            <tr>
-                                                <th className="sp-cart-pro-name" colSpan="2">Product</th>
-                                                <th className="sp-cart-pro-price">Price</th>
-                                                <th className="sp-cart-pro-status">Stock Status</th>
-                                                <th className="sp-cart-pro-add">Add to Cart</th>
-                                                <th className="sp-cart-pro-remove">Remove</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {items.map((item) => (
-                                                <tr key={item.id}>
-                                                    <td className="sp-cart-pro-img text-center" style={{ width: "100px" }}>
-                                                        <Link href={`/product/${item.id}`}>
-                                                            <img src={item.image} alt={item.name} className="img-fluid" style={{ maxWidth: "80px" }} />
-                                                        </Link>
-                                                    </td>
-                                                    <td className="sp-cart-pro-name">
-                                                        <Link href={`/product/${item.id}`}>{item.name}</Link>
-                                                    </td>
-                                                    <td className="sp-cart-pro-price">
-                                                        <span className="amount">${item.price.toFixed(2)}</span>
-                                                    </td>
-                                                    <td className="sp-cart-pro-status">
-                                                        <span className="text-success font-weight-bold">In Stock</span>
-                                                    </td>
-                                                    <td className="sp-cart-pro-add text-center">
-                                                        <button className="sp-btn-3" onClick={() => handleAddToCart(item)}>
-                                                            Add to Cart
-                                                        </button>
-                                                    </td>
-                                                    <td className="sp-cart-pro-remove text-center">
-                                                        <a href="#!" onClick={() => removeItem(item.id)} className="remove-item"><i className="ri-close-line text-danger"></i></a>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                    <div className="sp-wishlist-products mtb-minus-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <div className="row">
+                            {items.length === 0 ? (
+                                <div className="col-12 text-center py-5">
+                                    <i className="ri-heart-line text-muted mb-4" style={{ fontSize: "5rem" }}></i>
+                                    <h3 className="mb-3">Your wishlist is currently empty.</h3>
+                                    <p className="text-muted mb-4">Add your favorite items to your wishlist to easily find them later.</p>
+                                    <Link href="/" className="sp-btn-1">Return To Shop</Link>
                                 </div>
-                            </div>
-                        )}
+                            ) : (
+                                items.map((item) => (
+                                    <div key={item.id} className="col-xxl-3 col-xl-4 col-lg-4 col-sm-6 col-xs-6 sp-col-5 sp-product-box pro-gl-content">
+                                        <div className="sp-product-card">
+                                            <a href="#!" onClick={(e) => { e.preventDefault(); removeItem(item.id); }} className="remove-product">
+                                                <i className="ri-close-large-line"></i>
+                                            </a>
+                                            <div className="sp-pro-box">
+                                                <div className="sp-pro-img">
+                                                    <Link href={`/product/${item.id}`}>
+                                                        <div className="inner-img">
+                                                            <img className="main-img sp-product-img" src={item.image || "/images/product-placeholder.jpg"} alt={item.name} />
+                                                            <img className="hover-img" src={item.image || "/images/product-placeholder.jpg"} alt={item.name} />
+                                                        </div>
+                                                    </Link>
+                                                    <ul className="sp-pro-actions">
+                                                        <li className="sp-btn-group">
+                                                            <a href="#!" className="sp-wishlist" title="Wishlist">
+                                                                <i className="ri-heart-fill"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li className="sp-btn-group">
+                                                            <a href="#!" className="sp-quickview-btn">
+                                                                <i className="ri-eye-line"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li className="sp-btn-group">
+                                                            <a href="#!" className="sp-compare" title="Compare">
+                                                                <i className="ri-repeat-line"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li className="sp-btn-group">
+                                                            <a href="#!" onClick={(e) => { e.preventDefault(); handleAddToCart(item); }} className="add-to-cart" title="Add To Cart">
+                                                                <i className="ri-shopping-bag-4-line"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div className="sp-pro-details">
+                                                    <div className="sp-pro-subtitle">
+                                                        <Link href={`/product/${item.id}`}>{item.category || "Category"}</Link>
+                                                        <span className="sp-pro-rating">
+                                                            <i className="ri-star-fill"></i>
+                                                            <i className="ri-star-fill"></i>
+                                                            <i className="ri-star-fill"></i>
+                                                            <i className="ri-star-fill grey"></i>
+                                                            <i className="ri-star-fill grey"></i>
+                                                        </span>
+                                                    </div>
+                                                    <h4 className="sp-pro-title">
+                                                        <Link href={`/product/${item.id}`}>{item.name}</Link>
+                                                    </h4>
+                                                    <p className="sp-info">{item.description || "Lorem Ipsum is simply dummy text of the printing and typesetting industry."}</p>
+                                                    <div className="sp-price">
+                                                        <div className="inner-price">
+                                                            <span className="new-price">${item.price.toFixed(2)}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
                     </div>
                 </div>
             </section>
