@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 export default function ProductCard({ product, variant = "grid" }) {
     const { addItem } = useCart();
+    const { addItem: addWishlistItem, removeItem: removeWishlistItem, isInWishlist } = useWishlist();
 
     const handleAddToCart = (e) => {
         e.preventDefault();
@@ -12,6 +14,23 @@ export default function ProductCard({ product, variant = "grid" }) {
             name: product.name,
             price: product.price,
             image: product.image,
+        });
+    };
+
+    const handleToggleWishlist = (e) => {
+        e.preventDefault();
+
+        if (isInWishlist(product.id)) {
+            removeWishlistItem(product.id);
+            return;
+        }
+
+        addWishlistItem({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            category: product.category,
         });
     };
 
@@ -39,8 +58,8 @@ export default function ProductCard({ product, variant = "grid" }) {
                         </a>
                         <ul className="sp-pro-actions">
                             <li className="sp-btn-group">
-                                <a href="#!" className="sp-wishlist" title="Wishlist">
-                                    <i className="ri-heart-line"></i>
+                                <a href="#!" className="sp-wishlist" title="Wishlist" onClick={handleToggleWishlist}>
+                                    <i className={isInWishlist(product.id) ? "ri-heart-fill" : "ri-heart-line"}></i>
                                 </a>
                             </li>
                             <li className="sp-btn-group">

@@ -17,7 +17,7 @@ export default function Header() {
     const [searchCategory, setSearchCategory] = useState("vegetables");
 
     const { totalItems, setIsCartOpen } = useCart();
-    const { count: wishCount } = useWishlist();
+    const { items: wishItems, count: wishCount, removeItem: removeWishlistItem } = useWishlist();
 
     return (
         <header className="sp-header-2 sticky-nav">
@@ -163,19 +163,39 @@ export default function Header() {
                                                 <div className={`sp-dropdown-menu sp-wish-items ${wishDropdown ? "show" : ""}`}>
                                                     <div className="sp-wish-info">
                                                         <ul className="sp-list-block">
-                                                            <li className="wish-sidebar-list sp-list">
-                                                                <a href="#!" className="wish-remove-item"><i className="ri-close-line"></i></a>
-                                                                <a href="#!" className="sp-wish-pro-img">
-                                                                    <img src="/images/36.jpg" alt="product-img-1" />
-                                                                </a>
-                                                                <div className="sp-wish-contact">
-                                                                    <Link href="/product/1" className="sp-wish-sub-title">leather purse for women</Link>
-                                                                    <span className="wish-price">
-                                                                        <span className="new-price">$264</span> x 1
-                                                                        <span className="stock red">- 1 in Stock</span>
-                                                                    </span>
-                                                                </div>
-                                                            </li>
+                                                            {wishItems.length === 0 ? (
+                                                                <li className="wish-sidebar-list sp-list">
+                                                                    <div className="sp-wish-contact">
+                                                                        <span className="sp-wish-sub-title">Wishlist đang trống</span>
+                                                                        <span className="wish-price">Hãy thêm sản phẩm yêu thích của bạn.</span>
+                                                                    </div>
+                                                                </li>
+                                                            ) : (
+                                                                wishItems.slice(0, 4).map((item) => (
+                                                                    <li key={item.id} className="wish-sidebar-list sp-list">
+                                                                        <a
+                                                                            href="#!"
+                                                                            className="wish-remove-item"
+                                                                            onClick={(e) => {
+                                                                                e.preventDefault();
+                                                                                removeWishlistItem(item.id);
+                                                                            }}
+                                                                        >
+                                                                            <i className="ri-close-line"></i>
+                                                                        </a>
+                                                                        <Link href={`/product/${item.id}`} className="sp-wish-pro-img">
+                                                                            <img src={item.image || "/images/product-placeholder.jpg"} alt={item.name} />
+                                                                        </Link>
+                                                                        <div className="sp-wish-contact">
+                                                                            <Link href={`/product/${item.id}`} className="sp-wish-sub-title">{item.name}</Link>
+                                                                            <span className="wish-price">
+                                                                                <span className="new-price">${typeof item.price === "number" ? item.price.toFixed(2) : item.price}</span> x 1
+                                                                                <span className="stock red">- In Wishlist</span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </li>
+                                                                ))
+                                                            )}
                                                         </ul>
                                                     </div>
                                                     <div className="wish-sidebar-list btn">
@@ -392,10 +412,56 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* Mobile Menu rendered within Header so it gets the `.sp-header-2 .sp-mobile-menu` CSS scopes */}
-            <div className="sp-header">
-                <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+            <div className="sp-footer-nav">
+                <ul>
+                    <li>
+                        <a href="#!" className="sp-sidebar-toggle sp-category-toggle">
+                            <svg className="svg-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M384 928H192a96 96 0 0 1-96-96V640a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v192a96 96 0 0 1-96 96zM192 608a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h192a32 32 0 0 0 32-32V640a32 32 0 0 0-32-32H192zM784 928H640a96 96 0 0 1-96-96V640a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v144a32 32 0 0 1-64 0V640a32 32 0 0 0-32-32H640a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h144a32 32 0 0 1 0 64zM384 480H192a96 96 0 0 1-96-96V192a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v192a96 96 0 0 1-96 96zM192 160a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h192a32 32 0 0 0 32-32V192a32 32 0 0 0-32-32H192zM832 480H640a96 96 0 0 1-96-96V192a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v192a96 96 0 0 1-96 96zM640 160a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h192a32 32 0 0 0 32-32V192a32 32 0 0 0-32-32H640z"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <Link href="/login">
+                            <svg className="svg-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M512.476 648.247c-170.169 0-308.118-136.411-308.118-304.681 0-168.271 137.949-304.681 308.118-304.681 170.169 0 308.119 136.411 308.119 304.681C820.594 511.837 682.645 648.247 512.476 648.247L512.476 648.247zM512.476 100.186c-135.713 0-246.12 109.178-246.12 243.381 0 134.202 110.407 243.381 246.12 243.381 135.719 0 246.126-109.179 246.126-243.381C758.602 209.364 648.195 100.186 512.476 100.186L512.476 100.186zM935.867 985.115l-26.164 0c-9.648 0-17.779-6.941-19.384-16.35-2.646-15.426-6.277-30.52-11.142-44.95-24.769-87.686-81.337-164.13-159.104-214.266-63.232 35.203-134.235 53.64-207.597 53.64-73.555 0-144.73-18.537-208.084-53.922-78 50.131-134.75 126.68-159.564 214.549 0 0-4.893 18.172-11.795 46.4-2.136 8.723-10.035 14.9-19.112 14.9L88.133 985.116c-9.415 0-16.693-8.214-15.47-17.452C91.698 824.084 181.099 702.474 305.51 637.615c58.682 40.472 129.996 64.267 206.966 64.267 76.799 0 147.968-23.684 206.584-63.991 124.123 64.932 213.281 186.403 232.277 329.772C952.56 976.901 945.287 985.115 935.867 985.115L935.867 985.115z"></path>
+                            </svg>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href="/wishlist">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512.001 512">
+                                <g>
+                                    <path d="M256 455.516c-7.29 0-14.316-2.641-19.793-7.438-20.684-18.086-40.625-35.082-58.219-50.074l-.09-.078c-51.582-43.957-96.125-81.918-127.117-119.313C16.137 236.81 0 197.172 0 153.871c0-42.07 14.426-80.883 40.617-109.293C67.121 15.832 103.488 0 143.031 0c29.555 0 56.621 9.344 80.446 27.77C235.5 37.07 246.398 48.453 256 61.73c9.605-13.277 20.5-24.66 32.527-33.96C312.352 9.344 339.418 0 368.973 0c39.539 0 75.91 15.832 102.414 44.578C497.578 72.988 512 111.801 512 153.871c0 43.3-16.133 82.938-50.777 124.738-30.993 37.399-75.532 75.356-127.106 119.309-17.625 15.016-37.597 32.039-58.328 50.168a30.046 30.046 0 0 1-19.789 7.43zM143.031 29.992c-31.066 0-59.605 12.399-80.367 34.914-21.07 22.856-32.676 54.45-32.676 88.965 0 36.418 13.535 68.988 43.883 105.606 29.332 35.394 72.961 72.574 123.477 115.625l.093.078c17.66 15.05 37.68 32.113 58.516 50.332 20.961-18.254 41.012-35.344 58.707-50.418 50.512-43.051 94.137-80.223 123.469-115.617 30.344-36.618 43.879-69.188 43.879-105.606 0-34.516-11.606-66.11-32.676-88.965-20.758-22.515-49.3-34.914-80.363-34.914-22.758 0-43.653 7.235-62.102 21.5-16.441 12.719-27.894 28.797-34.61 40.047-3.452 5.785-9.53 9.238-16.261 9.238s-12.809-3.453-16.262-9.238c-6.71-11.25-18.164-27.328-34.61-40.047-18.448-14.265-39.343-21.5-62.097-21.5zm0 0" fill="#000000" opacity="1" data-original="#000000"></path>
+                                </g>
+                            </svg>
+                            <span>{wishCount}</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <a href="#!" className="sp-header-btn sp-cart-toggle" onClick={() => setIsCartOpen(true)}>
+                            <svg className="svg-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M351.552 831.424c-35.328 0-63.968 28.64-63.968 63.968 0 35.328 28.64 63.968 63.968 63.968 35.328 0 63.968-28.64 63.968-63.968C415.52 860.064 386.88 831.424 351.552 831.424L351.552 831.424 351.552 831.424zM799.296 831.424c-35.328 0-63.968 28.64-63.968 63.968 0 35.328 28.64 63.968 63.968 63.968 35.328 0 63.968-28.64 63.968-63.968C863.264 860.064 834.624 831.424 799.296 831.424L799.296 831.424 799.296 831.424zM862.752 799.456 343.264 799.456c-46.08 0-86.592-36.448-92.224-83.008L196.8 334.592 165.92 156.128c-1.92-15.584-16.128-28.288-29.984-28.288L95.2 127.84c-17.664 0-32-14.336-32-31.968 0-17.664 14.336-32 32-32l40.736 0c46.656 0 87.616 36.448 93.28 83.008l30.784 177.792 54.464 383.488c1.792 14.848 15.232 27.36 28.768 27.36l519.488 0c17.696 0 32 14.304 32 31.968S880.416 799.456 862.752 799.456L862.752 799.456zM383.232 671.52c-16.608 0-30.624-12.8-31.872-29.632-1.312-17.632 11.936-32.928 29.504-34.208l433.856-31.968c15.936-0.096 29.344-12.608 31.104-26.816l50.368-288.224c1.28-10.752-1.696-22.528-8.128-29.792-4.128-4.672-9.312-7.04-15.36-7.04L319.04 223.84c-17.664 0-32-14.336-32-31.968 0-17.664 14.336-31.968 32-31.968l553.728 0c24.448 0 46.88 10.144 63.232 28.608 18.688 21.088 27.264 50.784 23.52 81.568l-50.4 288.256c-5.44 44.832-45.92 81.28-92 81.28L385.6 671.424C384.8 671.488 384 671.52 383.232 671.52L383.232 671.52zM383.232 671.52"></path>
+                            </svg>
+                            <span>{totalItems}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!" className="sp-toggle-menu" onClick={() => setMobileMenuOpen(true)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 32 32">
+                                <g>
+                                    <g data-name="16">
+                                        <path d="M7 10h18a1 1 0 0 0 0-2H7a1 1 0 0 0 0 2zM25 15H7a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2zM25 22H7a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2z" fill="#000000" opacity="1" data-original="#000000"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
             </div>
+
+            {/* Mobile Menu rendered within Header so it gets the `.sp-header-2 .sp-mobile-menu` CSS scopes */}
+            <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
         </header>
     );
 }

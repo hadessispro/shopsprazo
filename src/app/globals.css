@@ -113,3 +113,12 @@
 .sub-img .col-md-6 {
     padding: 0 8px;
 }
+
+/* Ensure wishlist panel layers above header separators and sticky menu */
+.sp-header-2 .bottom-header .inner-bottom-header .sp-header-buttons .sp-wish-drop {
+    z-index: 30;
+}
+
+.sp-header-2 .bottom-header .inner-bottom-header .sp-header-buttons .sp-wish-drop .sp-dropdown-menu {
+    z-index: 31;
+}

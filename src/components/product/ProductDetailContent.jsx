@@ -7,11 +7,13 @@ import "swiper/css";
 import "swiper/css/thumbs";
 import "swiper/css/free-mode";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import ProductCard from "@/components/product/ProductCard";
 import ShopSidebar from "@/components/shop/ShopSidebar";
 
 export default function ProductDetailContent({ product, relatedProducts, layout = "left" }) {
     const { addItem, setIsCartOpen } = useCart();
+    const { addItem: addWishlistItem, removeItem: removeWishlistItem, isInWishlist } = useWishlist();
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [qty, setQty] = useState(1);
     const [activeTab, setActiveTab] = useState("detail");
@@ -51,6 +53,23 @@ export default function ProductDetailContent({ product, relatedProducts, layout 
         setIsCartOpen(true);
     };
 
+    const handleToggleWishlist = (e) => {
+        e.preventDefault();
+
+        if (isInWishlist(product?.id)) {
+            removeWishlistItem(product?.id);
+            return;
+        }
+
+        addWishlistItem({
+            id: product?.id,
+            name: product?.name,
+            price: product?.price,
+            image: productImages[0],
+            category: product?.category,
+        });
+    };
+
     const renderStars = (rating) => {
         return Array.from({ length: 5 }, (_, i) => (
             <i key={i} className={`ri-star-fill ${i >= rating ? "grey" : ""}`}></i>
@@ -65,7 +84,7 @@ export default function ProductDetailContent({ product, relatedProducts, layout 
                     border-radius: 10px;
                 }
             `}</style>
-            
+
             {/* Breadcrumb */}
             <section className="sp-breadcrumb-2 margin-b-50">
                 <div className="container-fluid">
@@ -131,7 +150,7 @@ export default function ProductDetailContent({ product, relatedProducts, layout 
                                         <div className="single-pro-desc m-t-1199">
                                             <div className="single-pro-content">
                                                 <h5 className="sp-single-title">{product?.name || "Premium Quality Product"}</h5>
-                                                
+
                                                 <div className="sp-single-rating-wrap">
                                                     <div className="sp-single-rating">
                                                         {renderStars(product?.rating || 4)}
@@ -151,7 +170,7 @@ export default function ProductDetailContent({ product, relatedProducts, layout 
                                                         <span className="sp-single-ps-title">IN STOCK</span>
                                                     </div>
                                                 </div>
-                                                
+
                                                 {isGrocery && (
                                                     <div className="sp-timer m-b-24">
                                                         <div className="timer dealend-timer" data-date="September 30, 2026 19:15:10 PDT">
@@ -200,20 +219,20 @@ export default function ProductDetailContent({ product, relatedProducts, layout 
                                                     <div className="sp-pro-variation">
                                                         <div className="sp-pro-variations">
                                                             <div className="sp-pro-variation-block m-b-15">
-                                                                <span style={{fontWeight: '700', color: '#777', width: '70px', display: 'inline-block'}}>Size:</span>
-                                                                <ul className="sp-size-list" style={{display: 'inline-flex', gap: '8px', listStyle: 'none', padding: 0, margin: 0}}>
+                                                                <span style={{ fontWeight: '700', color: '#777', width: '70px', display: 'inline-block' }}>Size:</span>
+                                                                <ul className="sp-size-list" style={{ display: 'inline-flex', gap: '8px', listStyle: 'none', padding: 0, margin: 0 }}>
                                                                     {(product?.sizes || "M, L, XL").split(",").map((size, idx) => (
-                                                                        <li key={idx}><a href="#!" className={idx === 0 ? "active" : ""} style={{border: '1px solid #ddd', padding: '2px 10px', borderRadius: '4px', color: '#777', display: 'inline-block'}}>{size.trim()}</a></li>
+                                                                        <li key={idx}><a href="#!" className={idx === 0 ? "active" : ""} style={{ border: '1px solid #ddd', padding: '2px 10px', borderRadius: '4px', color: '#777', display: 'inline-block' }}>{size.trim()}</a></li>
                                                                     ))}
                                                                 </ul>
                                                             </div>
                                                             {product?.colors && (
                                                                 <div className="sp-pro-variation-block">
-                                                                    <span style={{fontWeight: '700', color: '#777', width: '70px', display: 'inline-block'}}>Color:</span>
-                                                                    <ul className="sp-opt-swatch" style={{display: 'inline-flex', gap: '8px', listStyle: 'none', padding: 0, margin: 0}}>
+                                                                    <span style={{ fontWeight: '700', color: '#777', width: '70px', display: 'inline-block' }}>Color:</span>
+                                                                    <ul className="sp-opt-swatch" style={{ display: 'inline-flex', gap: '8px', listStyle: 'none', padding: 0, margin: 0 }}>
                                                                         {product.colors.map((color, i) => (
                                                                             <li key={i}>
-                                                                                <a href="#!" className="sp-opt-clr-img" style={{display:'inline-block', width:'20px', height:'20px', borderRadius:'50%', backgroundColor: color}}></a>
+                                                                                <a href="#!" className="sp-opt-clr-img" style={{ display: 'inline-block', width: '20px', height: '20px', borderRadius: '50%', backgroundColor: color }}></a>
                                                                             </li>
                                                                         ))}
                                                                     </ul>
@@ -242,8 +261,8 @@ export default function ProductDetailContent({ product, relatedProducts, layout 
                                                         </a>
                                                     </div>
                                                     <div className="sp-single-wishlist">
-                                                        <a href="#!" className="sp-btn-group wishlist" title="Wishlist">
-                                                            <i className="ri-heart-line"></i>
+                                                        <a href="#!" className="sp-btn-group wishlist" title="Wishlist" onClick={handleToggleWishlist}>
+                                                            <i className={isInWishlist(product?.id) ? "ri-heart-fill" : "ri-heart-line"}></i>
                                                         </a>
                                                     </div>
                                                     <div className="sp-single-quickview">
@@ -488,7 +507,7 @@ export default function ProductDetailContent({ product, relatedProducts, layout 
                     </div>
                 </div>
             </section>
-            
+
             {/* Related Products */}
             <section className="sp-product-popular sp-products padding-tb-50">
                 <div className="container">

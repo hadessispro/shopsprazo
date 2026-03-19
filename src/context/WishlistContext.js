@@ -6,6 +6,8 @@ const WishlistContext = createContext();
 export function WishlistProvider({ children }) {
     const [items, setItems] = useState([]);
 
+    const normalizeId = useCallback((id) => String(id), []);
+
     useEffect(() => {
         try {
             const saved = localStorage.getItem("sp-wishlist");
@@ -18,19 +20,23 @@ export function WishlistProvider({ children }) {
     }, [items]);
 
     const addItem = useCallback((product) => {
+        if (!product || product.id === undefined || product.id === null) return;
+
+        const normalizedId = normalizeId(product.id);
         setItems((prev) => {
-            if (prev.find((i) => i.id === product.id)) return prev;
+            if (prev.find((i) => normalizeId(i.id) === normalizedId)) return prev;
             return [...prev, product];
         });
-    }, []);
+    }, [normalizeId]);
 
     const removeItem = useCallback((id) => {
-        setItems((prev) => prev.filter((i) => i.id !== id));
-    }, []);
+        const normalizedId = normalizeId(id);
+        setItems((prev) => prev.filter((i) => normalizeId(i.id) !== normalizedId));
+    }, [normalizeId]);
 
     const isInWishlist = useCallback(
-        (id) => items.some((i) => i.id === id),
-        [items]
+        (id) => items.some((i) => normalizeId(i.id) === normalizeId(id)),
+        [items, normalizeId]
     );
 
     return (
