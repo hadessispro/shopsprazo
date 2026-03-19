@@ -21,7 +21,7 @@ export default function Footer() {
 
     return (
         <footer className="sp-footer margin-t-50">
-            <div className="footer-container">
+            <div className="footer-container" suppressHydrationWarning>
                 <div className="footer-top padding-t-100 padding-b-50">
                     <div className="container">
                         <div className="row m-minus-991">

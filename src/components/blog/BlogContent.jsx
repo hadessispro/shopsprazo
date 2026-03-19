@@ -18,7 +18,7 @@ export default function BlogContent() {
             <section className="sp-breadcrumb-2">
                 <div className="container">
                     <div className="row">
-                        <div className="col-12">
+                        <div className="col-12" suppressHydrationWarning>
                             <div className="sp-breadcrumb-inner">
                                 <h2 data-cursor="big" className="sp-breadcrumb-title">Blog Page</h2>
                                 <ul className="sp-breadcrumb-list">
@@ -39,7 +39,7 @@ export default function BlogContent() {
 
                         <div className={hasSidebar ? "sp-blogs-rightside col-lg-8 order-lg-last col-md-12 order-md-first" : "col-12"}>
                             <div className="sp-blogs-content">
-                                <div className="sp-blogs-inner" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                                <div className="sp-blogs-inner" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" suppressHydrationWarning>
                                     <div className="row">
                                         {blogPosts.map((post) => (
                                             <div className="col-xxl-4 col-xl-6 col-md-6 m-b-30" key={post.id}>
@@ -70,7 +70,7 @@ export default function BlogContent() {
                                 </div>
 
                                 {/* Pagination Start */}
-                                <div className="sp-pro-pagination" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                                <div className="sp-pro-pagination" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" suppressHydrationWarning>
                                     <span>Showing 1-6 of 20 items</span>
                                     <ul className="sp-pro-pagination-inner">
                                         <li><a className="active" href="#">1</a></li>
