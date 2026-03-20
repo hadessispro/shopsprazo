@@ -22,33 +22,32 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
-      {/* 1. Hero */}
+      {/* 1. Hero Section */}
       <GroceryHero />
-      {/* 2. Banner (3 discount banners) */}
+      {/* 2. 3 Discount Banners + Category Marquee */}
       <GroceryBanner />
-      {/* 3. Label Marquee */}
       <LabelMarquee variant="grocery" />
-      {/* 4. About / Services */}
+      {/* 3. About Our Company */}
       <GroceryServices />
-      {/* 5. Category Slider */}
+      {/* 4. Featured Top Categories (slider) */}
       <GroceryCategory />
-      {/* 6. Featured Products (Tabs) */}
+      {/* 5. Our Features Collection (Product Tabs: New Arrivals / Best Sellers / Top Rates) */}
       <GroceryProductTabs />
-      {/* 7. Service Bar (Free Ship, Support, Return, Payment) */}
+      {/* 6. Service Bar (Free Shipping, 24x7, Return, Payment) */}
       <GroceryServiceBar />
-      {/* 8. Collection Grid */}
+      {/* 7. Browse The Products - Our Features Collection (collection grid) */}
       <GroceryCollection />
-      {/* 9. Top Vendor */}
+      {/* 8. Top Vendor */}
       <GroceryTopVendor />
-      {/* 10. Hot Deals */}
+      {/* 9. Hot Deals (Deal of the Week + Fresh Fruits) */}
       <GroceryDeal />
-      {/* 11. Popular Products */}
+      {/* 10. Most Popular Products */}
       <GroceryPopularProducts />
-      {/* 12. Testimonial */}
+      {/* 11. Testimonial */}
       <GroceryTestimonial />
-      {/* 13. Blog */}
+      {/* 12. Blog */}
       <GroceryBlog />
-      {/* 14. Subscribe */}
+      {/* 13. Subscribe */}
       <GrocerySubscribe />
     </>
   );

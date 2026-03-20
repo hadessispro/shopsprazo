@@ -264,12 +264,13 @@ export const heroSlides = [
   },
 ];
 
+/* Blog posts - images from blog-left-sidebar.html */
 export const blogPosts = [
   {
     id: 1,
     title: "Beginner's Guide to Eating More Vegetables Without Even Trying.",
     date: "February 4, 2026",
-    image: "/images/blog/1.jpg",
+    image: "/images/1_11.jpg",
     excerpt:
       "A vibrant corner of the web dedicated to all things vegetable from garden to table. Whether you're a seasoned grower, curious cook, or veggie newbie, you'll find tips, recipes, and green inspiration to nourish your body and your lifestyle.",
     category: "Vegetables",
@@ -278,7 +279,7 @@ export const blogPosts = [
     id: 2,
     title: "Tech in Trolleys: Smart Innovations in Bakery Shopping.",
     date: "May 12, 2025",
-    image: "/images/blog/2.jpg",
+    image: "/images/2_10.jpg",
     excerpt:
       "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
     category: "Bakery",
@@ -287,7 +288,7 @@ export const blogPosts = [
     id: 3,
     title: "Freshly Squeezed: The Latest News in the Juice Industry.",
     date: "June 22, 2027",
-    image: "/images/blog/3.jpg",
+    image: "/images/3_8.jpg",
     excerpt:
       "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.",
     category: "Drinks",
@@ -296,7 +297,7 @@ export const blogPosts = [
     id: 4,
     title: "Fresh Picks: Seasonal Fruit Trends You Need to Know.",
     date: "December 19, 2026",
-    image: "/images/blog/4.jpg",
+    image: "/images/4_7.jpg",
     excerpt:
       "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage.",
     category: "Fruits",
@@ -305,7 +306,7 @@ export const blogPosts = [
     id: 5,
     title: "Confessions of a Pickle Addict: Tales from the Briny Deep.",
     date: "September 22, 2025",
-    image: "/images/blog/5.jpg",
+    image: "/images/5_6.jpg",
     excerpt:
       "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage.",
     category: "Pickles",
@@ -315,7 +316,7 @@ export const blogPosts = [
     title:
       "Sweet, Sour & Surprising: A Journey Into the World of Pickled Fruits.",
     date: "November 05, 2027",
-    image: "/images/blog/6.jpg",
+    image: "/images/6_5.jpg",
     excerpt:
       "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage.",
     category: "Fruits",
@@ -324,7 +325,7 @@ export const blogPosts = [
     id: 7,
     title: "The best fashion influencers.",
     date: "February 10, 2025",
-    image: "/images/blog/7.jpg",
+    image: "/images/7_6.jpg",
     excerpt:
       "A look at the top food and lifestyle influencers making waves in the organic and grocery world this season.",
     category: "Organic",
@@ -333,11 +334,72 @@ export const blogPosts = [
     id: 8,
     title: "Vogue Shopping Weekend.",
     date: "March 14, 2025",
-    image: "/images/blog/8.jpg",
+    image: "/images/8_5.jpg",
     excerpt:
       "Discover the freshest picks from the weekend grocery and farmer's market haul you don't want to miss.",
     category: "Fruits",
   },
+  {
+    id: 9,
+    title:
+      "Sweet, Sour & Surprising: A Journey Into the World of Pickled Fruits.",
+    date: "November 05, 2027",
+    image: "/images/9_3.jpg",
+    excerpt:
+      "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage.",
+    category: "Fruits",
+  },
+];
+
+/* Sidebar recent articles - exact from blog-left-sidebar.html */
+export const sidebarRecentArticles = [
+  {
+    id: 1,
+    img: "/images/6_5.jpg",
+    title: "The best fashion influencers.",
+    date: "February 10, 2025-2026",
+    cat: "Organic",
+  },
+  {
+    id: 2,
+    img: "/images/5_6.jpg",
+    title: "Vogue Shopping Weekend.",
+    date: "March 14, 2025-2026",
+    cat: "Fruits",
+  },
+  {
+    id: 3,
+    img: "/images/4_7.jpg",
+    title: "Fashion Market Reveals Her Jacket.",
+    date: "June 09, 2025-2026",
+    cat: "Vegetables",
+  },
+  {
+    id: 4,
+    img: "/images/3_8.jpg",
+    title: "Summer Trending Fashion Market.",
+    date: "July 17, 2025-2026",
+    cat: "Fastfood",
+  },
+  {
+    id: 5,
+    img: "/images/2_10.jpg",
+    title: "Winter 2025 Trending Fashion Market.",
+    date: "August 02, 2025-2026",
+    cat: "Vegetables",
+  },
+];
+
+/* Sidebar categories - exact from blog-left-sidebar.html (8 items including Phones) */
+export const sidebarCategories = [
+  { name: "Dairy & Milk", count: 68 },
+  { name: "Seafood", count: 58 },
+  { name: "Bakery", count: 84 },
+  { name: "Cosmetics", count: 63 },
+  { name: "Electrics", count: 75 },
+  { name: "Phones", count: 26 },
+  { name: "Clothes", count: 39 },
+  { name: "Watch", count: 48 },
 ];
 
 export const labelItems = [

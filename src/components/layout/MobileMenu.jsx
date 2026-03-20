@@ -53,7 +53,7 @@ export default function MobileMenu({ isOpen, onClose }) {
                     <Link href="/">Grocery</Link>
                   </li>
                   <li>
-                    <Link href="/grocery">Fashion</Link>
+                    <Link href="/fashion">Fashion</Link>
                   </li>
                 </ul>
               </li>

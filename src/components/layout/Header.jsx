@@ -239,6 +239,15 @@ export default function Header() {
                         </a>
                         <ul
                           className={`sp-dropdown-menu ${userDropdown ? "show" : ""}`}
+                          style={
+                            userDropdown
+                              ? {
+                                  opacity: 1,
+                                  visibility: "visible",
+                                  marginTop: "15px",
+                                }
+                              : {}
+                          }
                         >
                           <li>
                             <Link className="dropdown-item" href="/register">
@@ -295,6 +304,15 @@ export default function Header() {
                         </a>
                         <div
                           className={`sp-dropdown-menu sp-wish-items ${wishDropdown ? "show" : ""}`}
+                          style={
+                            wishDropdown
+                              ? {
+                                  opacity: 1,
+                                  visibility: "visible",
+                                  marginTop: "15px",
+                                }
+                              : {}
+                          }
                         >
                           <div className="sp-wish-info">
                             <ul className="sp-list-block">
@@ -534,12 +552,12 @@ export default function Header() {
                           </ul>
                           <ul className="mega-block">
                             <li>
-                              <Link href="/grocery">
+                              <Link href="/fashion">
                                 <img src="/images/2.jpg" alt="pages" />
                               </Link>
                             </li>
                             <li className="img_title">
-                              <Link href="/grocery">Fashion</Link>
+                              <Link href="/fashion">Fashion</Link>
                             </li>
                           </ul>
                         </li>

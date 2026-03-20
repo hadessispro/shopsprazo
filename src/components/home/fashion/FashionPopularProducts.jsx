@@ -9,108 +9,82 @@ import { useWishlist } from "@/context/WishlistContext";
 
 const POPULAR = [
   {
-    id: "p1",
-    title: "Butternut squash Pumpkin",
-    price: 11,
-    oldPrice: 12,
-    img: "/images/28_1.jpg",
-    img2: "/images/29_1.jpg",
-    cat: "vegetables",
-    unit: "2 kg",
-    rating: 4,
-    badge: "New",
-    stock: null,
-  },
-  {
-    id: "p2",
-    title: "Fresh Pineapple",
-    price: 5,
-    oldPrice: null,
-    img: "/images/14_1.jpg",
-    img2: "/images/15_1.jpg",
-    cat: "Fruit",
-    unit: "1 kg",
-    rating: 2,
-    badge: "sale",
-    stock: "2kg left",
-  },
-  {
-    id: "p3",
-    title: "Fresh Passion Fruit",
-    price: 25,
-    oldPrice: 30,
-    img: "/images/16.jpg",
-    img2: "/images/17.jpg",
-    cat: "Fruits",
-    unit: "2 kg",
-    rating: 5,
-    badge: null,
-    stock: null,
-  },
-  {
-    id: "p4",
-    title: "Organic Spinach Leaves",
-    price: 9,
-    oldPrice: 15,
-    img: "/images/18.jpg",
-    img2: "/images/19.jpg",
-    cat: "vegetables",
-    unit: "1 kg",
-    rating: 5,
-    badge: "New",
-    stock: null,
-  },
-  {
-    id: "p5",
-    title: "Organic okra",
-    price: 25,
-    oldPrice: 30,
-    img: "/images/26_1.jpg",
-    img2: "/images/27_1.jpg",
-    cat: "Vegetable",
-    unit: "2 kg",
-    rating: 5,
-    badge: "Hot",
-    stock: null,
-  },
-  {
-    id: "p6",
-    title: "Organic Tomato",
-    price: 2,
-    oldPrice: 3,
-    img: "/images/10_1.jpg",
-    img2: "/images/11_1.jpg",
-    cat: "Vegetables",
-    unit: "500g",
+    id: "fp1",
+    title: "synthetic fabric belt",
+    price: 35,
+    oldPrice: 40,
+    img: "/images/76.jpg",
+    img2: "/images/76.jpg",
+    cat: "belt",
+    unit: '30", 32"',
     rating: 3,
     badge: null,
     stock: null,
   },
   {
-    id: "p7",
-    title: "Green leaves Coriander",
-    price: 10,
-    oldPrice: 12,
-    img: "/images/12_2.jpg",
-    img2: "/images/13_2.jpg",
-    cat: "Vegetables",
-    unit: "100g",
+    id: "fp2",
+    title: "half shirt pattern for men",
+    price: 66,
+    oldPrice: 99,
+    img: "/images/49.jpg",
+    img2: "/images/49.jpg",
+    cat: "shirt",
+    unit: "S, M, L",
+    rating: 5,
+    badge: null,
+    stock: null,
+  },
+  {
+    id: "fp3",
+    title: "sandals for women flat",
+    price: 25,
+    oldPrice: null,
+    img: "/images/64.jpg",
+    img2: "/images/65.jpg",
+    cat: "sandals",
+    unit: "8, 9, 10",
+    rating: 2,
+    badge: "sale",
+    stock: "2kg left",
+  },
+  {
+    id: "fp4",
+    title: "Sprazo gown for Women",
+    price: 356,
+    oldPrice: 380,
+    img: "/images/87_1.jpg",
+    img2: "/images/88_1.jpg",
+    cat: "gown",
+    unit: "M, L",
+    rating: 5,
+    badge: "Hot",
+    stock: null,
+  },
+  {
+    id: "fp5",
+    title: "leather purse for women",
+    price: 264,
+    oldPrice: 289,
+    img: "/images/36.jpg",
+    img2: "/images/37.jpg",
+    cat: "Purses",
+    unit: "",
     rating: 4,
     badge: "New",
     stock: null,
   },
   {
-    id: "p8",
-    title: "Fresh Raspberry",
-    price: 22,
+    id: "fp6",
+    title: "half sleeve t shirt",
+    price: 88,
     oldPrice: null,
-    img: "/images/24_1.jpg",
-    img2: "/images/25_1.jpg",
-    cat: "Fruit",
-    unit: "1 kg",
-    rating: 2,
+    img: "/images/42.jpg",
+    img2: "/images/43.jpg",
+    cat: "T-shirt",
+    unit: "S, M, XL",
+    rating: 4,
     badge: null,
-    stock: "5kg left",
+    stock: "2 left",
   },
 ];
 
@@ -148,9 +122,9 @@ function ProductCard({ p }) {
   };
 
   return (
-    <div className="sp-product-box">
+    <div className="sp-product-box-2">
       <div className="sp-product-card">
-        <div className="sp-pro-box">
+        <div className="sp-pro-box-2">
           <div className="sp-pro-img">
             {p.badge && (
               <span className="flags">
@@ -204,7 +178,7 @@ function ProductCard({ p }) {
                 {p.oldPrice && <span className="old-price">${p.oldPrice}</span>}
                 {p.stock && <span className="item-left">{p.stock}</span>}
               </div>
-              <span className="last-items">{p.unit}</span>
+              {p.unit && <span className="last-items">{p.unit}</span>}
             </div>
           </div>
         </div>
@@ -213,7 +187,7 @@ function ProductCard({ p }) {
   );
 }
 
-export default function GroceryPopularProducts() {
+export default function FashionPopularProducts() {
   const swiperRef = useRef(null);
 
   return (

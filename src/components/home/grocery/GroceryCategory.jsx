@@ -1,19 +1,19 @@
 "use client";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
 import Link from "next/link";
 
 const CATEGORIES = [
-  { id: 1, name: "Vegetables", image: "/fonts/1.svg" },
-  { id: 2, name: "Fresh Fruits", image: "/fonts/2.svg" },
-  { id: 3, name: "Milk & Eggs", image: "/fonts/3.svg" },
-  { id: 4, name: "Bakery", image: "/fonts/4.svg" },
-  { id: 5, name: "House Hold", image: "/fonts/5.svg" },
-  { id: 6, name: "Dry Fruits", image: "/fonts/6.svg" },
-  { id: 7, name: "Drinks", image: "/fonts/7.svg" },
+  { name: "Vegetables", image: "/fonts/1.svg" },
+  { name: "Fresh Fruits", image: "/fonts/2.svg" },
+  { name: "Milk & Eggs", image: "/fonts/3.svg" },
+  { name: "Bakery", image: "/fonts/4.svg" },
+  { name: "House Hold", image: "/fonts/5.svg" },
+  { name: "Dry Fruits", image: "/fonts/6.svg" },
+  { name: "Drinks", image: "/fonts/7.svg" },
+  { name: "Vegetables", image: "/fonts/1.svg" },
 ];
 
 export default function GroceryCategory() {
@@ -38,24 +38,24 @@ export default function GroceryCategory() {
           </div>
         </div>
         <Swiper
-          modules={[Autoplay, Navigation]}
+          modules={[Autoplay]}
           spaceBetween={24}
-          loop={true}
-          loopedSlides={7}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          speed={800}
-          navigation
+          slidesPerView={8}
+          loop={false}
+          autoplay={false}
+          speed={500}
           breakpoints={{
             0: { slidesPerView: 2 },
-            420: { slidesPerView: 3 },
+            421: { slidesPerView: 3 },
             768: { slidesPerView: 4 },
             992: { slidesPerView: 5 },
             1200: { slidesPerView: 6 },
+            1400: { slidesPerView: 7 },
+            1600: { slidesPerView: 8 },
           }}
           className="sp-category-slider"
         >
-          {/* Duplicate 3x để loop không bị lỗi với slidesPerView=6 */}
-          {[...CATEGORIES, ...CATEGORIES, ...CATEGORIES].map((cat, idx) => (
+          {CATEGORIES.map((cat, idx) => (
             <SwiperSlide key={idx}>
               <div className="sp-category-block">
                 <div className="category-detail">

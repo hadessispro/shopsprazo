@@ -5,7 +5,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import Link from "next/link";
 
-// Collection dùng product images thực của grocery
+/* Exact data from index_1.html collection section */
 const ITEMS = [
   {
     id: 1,
@@ -16,30 +16,36 @@ const ITEMS = [
   },
   {
     id: 2,
-    name: "Vegetable Pickles",
-    img: "/images/9.jpg",
+    name: "Vegetable pickles",
+    img: "/images/2_8.jpg",
     price: "$9",
     rating: 5,
   },
   {
     id: 3,
-    name: "Fresh Fruits",
-    img: "/images/16.jpg",
+    name: "fresh Fruits",
+    img: "/images/3_6.jpg",
     price: "$25",
     rating: 4,
   },
-  { id: 4, name: "Fresh Juice", img: "/images/14.jpg", price: "$5", rating: 5 },
+  {
+    id: 4,
+    name: "Fresh juice",
+    img: "/images/5_3.jpg",
+    price: "$5",
+    rating: 5,
+  },
   {
     id: 5,
     name: "Bakery & Sweets",
-    img: "/images/22.jpg",
+    img: "/images/6_3.jpg",
     price: "$10",
     rating: 4,
   },
   {
     id: 6,
-    name: "Best Dry Fruits",
-    img: "/images/6.jpg",
+    name: "Best Dryfruits",
+    img: "/images/7_3.jpg",
     price: "$95",
     rating: 5,
   },
@@ -55,7 +61,6 @@ function Stars({ n }) {
   );
 }
 
-// Đúng từ JS gốc: 0→1, 481→2, 992→3, 1200→4, 1400→5 | nav:false
 const BP = {
   0: { slidesPerView: 1, spaceBetween: 24 },
   481: { slidesPerView: 2, spaceBetween: 24 },
@@ -121,7 +126,7 @@ export default function GroceryCollection() {
                     <Stars n={c.rating} />
                     <div className="collection-footer">
                       <div className="price">
-                        <h5>Starts from : {c.price}</h5>
+                        <h5>Starts From : {c.price}</h5>
                       </div>
                     </div>
                   </div>
