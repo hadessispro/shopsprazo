@@ -5,161 +5,185 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePathname } from "next/navigation";
 
 export function useGsapAnimations() {
-    const pathname = usePathname();
+  const pathname = usePathname();
 
-    useEffect(() => {
-        // Register ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
+  useEffect(() => {
+    // ── AOS-style fade-up via GSAP (thay AOS lib) ──────────────────
+    gsap.registerPlugin(ScrollTrigger);
 
-        // Context for easy cleanup
-        let ctx = gsap.context(() => {
-            // 1. Text Reveal Animation (.sp-title h2)
-            const titles = gsap.utils.toArray(".sp-title h2");
-            titles.forEach((title) => {
-                gsap.from(title, {
-                    y: 50,
-                    opacity: 0,
-                    duration: 1,
-                    scrollTrigger: {
-                        trigger: title,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse"
-                    }
-                });
-            });
+    // Smooth scroll bằng GSAP ticker (bổ sung cho CSS scroll-behavior)
+    ScrollTrigger.defaults({ scroller: window });
 
-            // 2. Fade Up General Animation ([data-aos="fade-up"])
-            const fadeElements = gsap.utils.toArray('[data-aos="fade-up"]');
-            fadeElements.forEach((el) => {
-                gsap.fromTo(el,
-                    { y: 50, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        duration: 1,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: el,
-                            start: "top 85%",
-                            toggleActions: "play none none reverse"
-                        }
-                    }
-                );
-            });
+    let ctx = gsap.context(() => {
+      // 1. Tiêu đề .sp-title h2 – reveal từ dưới lên
+      gsap.utils.toArray(".sp-title h2").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 82%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      });
 
-            // 3. Blog Image Reveal Animation (.reveal-mask)
-            const revealWrappers = gsap.utils.toArray(".reveal-wrapper");
-            revealWrappers.forEach((wrapper) => {
-                const mask = wrapper.querySelector(".reveal-mask");
-                if (!mask) return;
+      // 2. Tất cả [data-aos="fade-up"] – giả lập AOS
+      gsap.utils.toArray('[data-aos="fade-up"]').forEach((el) => {
+        // Skip nếu đã được animate bởi AOS thật
+        if (el.classList.contains("aos-animate")) return;
+        const delay = parseFloat(el.dataset.aosDelay || 0) / 1000;
+        const duration = parseFloat(el.dataset.aosDuration || 1000) / 1000;
+        gsap.fromTo(
+          el,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration,
+            ease: "power2.out",
+            delay,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      });
 
-                // Set initial state: mask covers image
-                gsap.set(mask, { xPercent: 0 });
+      // 3. Parallax cho banner blocks
+      gsap.utils.toArray(".sp-banner-block").forEach((banner) => {
+        gsap.to(banner, {
+          backgroundPosition: "50% 100%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: banner,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
 
-                // On scroll, slide mask out to the right to reveal blog image
-                gsap.to(mask, {
-                    xPercent: 100,
-                    duration: 1.2,
-                    ease: "power3.inOut",
-                    onComplete: () => {
-                        wrapper.classList.add("revealed");
-                    },
-                    scrollTrigger: {
-                        trigger: wrapper,
-                        start: "top 85%",
-                        toggleActions: "play none none none",
-                    }
-                });
-            });
-
-            // 3. Parallax Banner Animation (.sp-banner-block)
-            const banners = gsap.utils.toArray(".sp-banner-block");
-            banners.forEach((banner) => {
-                gsap.to(banner, {
-                    backgroundPosition: "50% 100%",
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: banner,
-                        start: "top bottom",
-                        end: "bottom top",
-                        scrub: true
-                    }
-                });
-            });
-
-            // 4. Custom Cursor Logic
-            const cursor = document.createElement('div');
-            cursor.className = 'bl_Cursor';
-            const inner = document.createElement('div');
-            inner.className = 'bl_Cursor__inner';
-            cursor.appendChild(inner);
-
-            // Only add cursor if not on mobile/touch device and it doesn't exist
-            if (!window.matchMedia("(pointer: coarse)").matches && !document.querySelector('.bl_Cursor')) {
-                document.body.appendChild(cursor);
-
-                cursor.style.position = 'fixed';
-                cursor.style.top = '0';
-                cursor.style.left = '0';
-                cursor.style.width = '20px';
-                cursor.style.height = '20px';
-                cursor.style.borderRadius = '50%';
-                cursor.style.backgroundColor = 'rgba(0,0,0,0.5)';
-                cursor.style.pointerEvents = 'none';
-                cursor.style.zIndex = '9999';
-                cursor.style.transform = 'translate(-50%, -50%)';
-                cursor.style.transition = 'transform 0.1s ease, width 0.2s ease, height 0.2s ease';
-
-                const moveCursor = (e) => {
-                    gsap.to(cursor, {
-                        x: e.clientX,
-                        y: e.clientY,
-                        duration: 0.1,
-                        ease: "power2.out"
-                    });
-                };
-
-                const hoverCursor = () => {
-                    gsap.to(cursor, { scale: 2, backgroundColor: "rgba(255,0,0,0.5)", duration: 0.2 });
-                };
-
-                const unhoverCursor = () => {
-                    gsap.to(cursor, { scale: 1, backgroundColor: "rgba(0,0,0,0.5)", duration: 0.2 });
-                };
-
-                window.addEventListener("mousemove", moveCursor);
-
-                // Add hover effects for links and buttons
-                const interactables = document.querySelectorAll('a, button');
-                interactables.forEach(el => {
-                    el.addEventListener('mouseenter', hoverCursor);
-                    el.addEventListener('mouseleave', unhoverCursor);
-                });
-
-                // Cleanup cursor listeners later
-                cursor._cleanup = () => {
-                    window.removeEventListener("mousemove", moveCursor);
-                    interactables.forEach(el => {
-                        el.removeEventListener('mouseenter', hoverCursor);
-                        el.removeEventListener('mouseleave', unhoverCursor);
-                    });
-                    if (document.body.contains(cursor)) {
-                        document.body.removeChild(cursor);
-                    }
-                };
-            }
+      // 4. Hero text animation
+      gsap.utils
+        .toArray(".sp-hero-details, .sp-hero-details h1, .sp-animation")
+        .forEach((el) => {
+          gsap.fromTo(
+            el,
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, ease: "power3.out", delay: 0.1 },
+          );
         });
 
-        // Cleanup function
-        return () => {
-            ctx.revert(); // Revert all GSAP animations
-            ScrollTrigger.getAll().forEach(t => t.kill()); // Kill all triggers
+      // 5. Blog image reveal mask
+      gsap.utils.toArray(".reveal-wrapper").forEach((wrapper) => {
+        const mask = wrapper.querySelector(".reveal-mask");
+        if (!mask) return;
+        gsap.set(mask, { xPercent: 0 });
+        gsap.to(mask, {
+          xPercent: 100,
+          duration: 1.2,
+          ease: "power3.inOut",
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
 
-            // Cleanup cursor if created
-            const cursor = document.querySelector('.bl_Cursor');
-            if (cursor && cursor._cleanup) {
-                cursor._cleanup();
-            }
-        };
-    }, [pathname]); // Re-run when pathname changes to ensure new elements are animated
+      // 6. Product cards stagger
+      gsap.utils
+        .toArray(".sp-product-box, .sp-collection-block, .sp-category-block")
+        .forEach((el, i) => {
+          gsap.fromTo(
+            el,
+            { y: 30, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              ease: "power2.out",
+              delay: (i % 5) * 0.08,
+              scrollTrigger: {
+                trigger: el,
+                start: "top 92%",
+                toggleActions: "play none none none",
+              },
+            },
+          );
+        });
+    });
+
+    // ── Custom cursor ─────────────────────────────────────────────────
+    const isMobile = window.matchMedia("(pointer: coarse)").matches;
+    if (!isMobile && !document.querySelector(".bl_Cursor")) {
+      const cursor = document.createElement("div");
+      cursor.className = "bl_Cursor";
+      Object.assign(cursor.style, {
+        position: "fixed",
+        top: "0",
+        left: "0",
+        width: "18px",
+        height: "18px",
+        borderRadius: "50%",
+        background: "rgba(0,0,0,0.45)",
+        pointerEvents: "none",
+        zIndex: "9999",
+        transform: "translate(-50%,-50%)",
+        transition: "width .2s, height .2s, background .2s",
+      });
+      document.body.appendChild(cursor);
+
+      const onMove = (e) =>
+        gsap.to(cursor, {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0.12,
+          ease: "power2.out",
+        });
+      const onEnter = () =>
+        gsap.to(cursor, {
+          scale: 2,
+          background: "rgba(var(--color-primary-rgb,0,180,80),0.55)",
+          duration: 0.2,
+        });
+      const onLeave = () =>
+        gsap.to(cursor, {
+          scale: 1,
+          background: "rgba(0,0,0,0.45)",
+          duration: 0.2,
+        });
+
+      window.addEventListener("mousemove", onMove);
+      document.querySelectorAll("a, button").forEach((el) => {
+        el.addEventListener("mouseenter", onEnter);
+        el.addEventListener("mouseleave", onLeave);
+      });
+
+      cursor._cleanup = () => {
+        window.removeEventListener("mousemove", onMove);
+        document.querySelectorAll("a, button").forEach((el) => {
+          el.removeEventListener("mouseenter", onEnter);
+          el.removeEventListener("mouseleave", onLeave);
+        });
+        if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
+      };
+    }
+
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      const cursor = document.querySelector(".bl_Cursor");
+      if (cursor?._cleanup) cursor._cleanup();
+    };
+  }, [pathname]);
 }

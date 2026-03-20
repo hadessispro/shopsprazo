@@ -26,7 +26,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" style={{ scrollBehavior: "auto" }} suppressHydrationWarning>
+    <html
+      lang="en"
+      style={{ scrollBehavior: "smooth" }}
+      suppressHydrationWarning
+    >
       <body className="animsition" suppressHydrationWarning>
         <AppWrapper>{children}</AppWrapper>
       </body>

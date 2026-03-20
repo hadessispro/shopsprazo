@@ -1,32 +1,38 @@
-import GroceryHero from "@/components/home/grocery/GroceryHero";
-import GroceryServices from "@/components/home/grocery/GroceryServices";
-import GroceryCategory from "@/components/home/grocery/GroceryCategory";
-import GroceryProductTabs from "@/components/home/grocery/GroceryProductTabs";
-import GroceryTopVendor from "@/components/home/grocery/GroceryTopVendor";
-import GroceryDeal from "@/components/home/grocery/GroceryDeal";
-import GroceryPopularProducts from "@/components/home/grocery/GroceryPopularProducts";
-import GroceryTestimonial from "@/components/home/grocery/GroceryTestimonial";
-import GroceryBlog from "@/components/home/grocery/GroceryBlog";
-import GrocerySubscribe from "@/components/home/grocery/GrocerySubscribe";
+import HeroSlider from "@/components/home/HeroSlider";
+import LabelMarquee from "@/components/home/LabelMarquee";
+import FashionCategory from "@/components/home/fashion/FashionCategory";
+import FashionAbout from "@/components/home/fashion/FashionAbout";
+import FashionBanners from "@/components/home/fashion/FashionBanners";
+import ProductTabs from "@/components/home/ProductTabs";
+import FashionServices from "@/components/home/fashion/FashionServices";
+import FashionCollection from "@/components/home/fashion/FashionCollection";
+import FashionVendor from "@/components/home/fashion/FashionVendor";
+import FashionDeal from "@/components/home/fashion/FashionDeal";
+import FashionTestimonial from "@/components/home/fashion/FashionTestimonial";
+import FashionBlog from "@/components/home/fashion/FashionBlog";
+import FashionSubscribe from "@/components/home/fashion/FashionSubscribe";
 
 export const metadata = {
-  title: "Sprazo - Grocery eCommerce",
-  description: "Sprazo - Best grocery collection online. Get fresh and organic food.",
+  title: "Sprazo - Fashion eCommerce",
+  description: "Sprazo - Best fashion and lifestyle collection online.",
 };
 
-export default function GroceryPage() {
+export default function FashionPage() {
   return (
     <>
-      <GroceryHero />
-      <GroceryServices />
-      <GroceryCategory />
-      <GroceryProductTabs />
-      <GroceryTopVendor />
-      <GroceryDeal />
-      <GroceryPopularProducts />
-      <GroceryTestimonial />
-      <GroceryBlog />
-      <GrocerySubscribe />
+      <HeroSlider />
+      <LabelMarquee variant="fashion" />
+      <FashionCategory />
+      <FashionAbout />
+      <FashionBanners />
+      <ProductTabs filterType="fashion" />
+      <FashionServices />
+      <FashionCollection />
+      <FashionVendor />
+      <FashionDeal />
+      <FashionTestimonial />
+      <FashionBlog />
+      <FashionSubscribe />
     </>
   );
 }
