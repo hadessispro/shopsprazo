@@ -36,7 +36,7 @@ export default function ShopContent() {
     });
 
     const sidebar = hasSidebar ? (
-        <div className="col-lg-3">
+        <div className="sp-shop-sidebar col-lg-3">
             <ShopSidebar />
         </div>
     ) : null;

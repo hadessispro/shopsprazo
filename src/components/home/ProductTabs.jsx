@@ -8,15 +8,25 @@ import { products } from "@/data/mockData";
 
 const tabs = ["New Arrivals", "Best Sellers", "Top Rated", "Featured"];
 
-export default function ProductTabs() {
+export default function ProductTabs({ filterType = "fashion" }) {
     const [activeTab, setActiveTab] = useState(0);
+
+    const filteredProducts = products.filter(p => {
+        if (filterType === "fashion") {
+            return !["Fruits", "Vegetables", "Bakery", "Drinks", "Pickles"].includes(p.category);
+        } else if (filterType === "grocery") {
+            return ["Fruits", "Vegetables", "Bakery", "Drinks", "Pickles"].includes(p.category);
+        }
+        return true;
+    });
 
     // Simulate different product sets per tab (in real app, filter by category)
     const getProducts = (tabIndex) => {
-        const start = (tabIndex * 3) % products.length;
+        if (filteredProducts.length === 0) return [];
+        const start = (tabIndex * 3) % filteredProducts.length;
         const result = [];
-        for (let i = 0; i < Math.min(10, products.length); i++) {
-            result.push(products[(start + i) % products.length]);
+        for (let i = 0; i < Math.min(10, filteredProducts.length); i++) {
+            result.push(filteredProducts[(start + i) % filteredProducts.length]);
         }
         return result;
     };

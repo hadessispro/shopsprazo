@@ -10,6 +10,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@/styles/style.css";
 import "@/styles/demo-2.css";
+import "@/styles/dark-scoped.css";
 import "./globals.css";
 import AppWrapper from "@/components/layout/AppWrapper";
 

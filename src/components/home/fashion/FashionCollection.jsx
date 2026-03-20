@@ -73,11 +73,11 @@ export default function FashionCollection() {
                                 </div>
                             </SwiperSlide>
                         ))}
+                        <div className="owl-nav">
+                            <button type="button" className="owl-prev custom-nav-prev-col"></button>
+                            <button type="button" className="owl-next custom-nav-next-col"></button>
+                        </div>
                     </Swiper>
-                    <div className="owl-nav">
-                        <button type="button" className="owl-prev custom-nav-prev-col"></button>
-                        <button type="button" className="owl-next custom-nav-next-col"></button>
-                    </div>
                 </div>
             </div>
         </section>

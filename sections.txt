@@ -1,0 +1,14 @@
+sp-hero-2
+sp-label-2 m-b-50
+sp-category-2 p-tb-50
+sp-about-2 padding-tb-50
+sp-banner-2 half-bg-2 p-t-100 p-b-50 m-t-50
+sp-product-tab sp-products padding-tb-50
+sp-service padding-t-50 padding-b-100
+sp-collection-2 padding-tb-100
+sp-vendor-tab padding-t-100 padding-b-50
+sp-deal-2 padding-tb-50
+sp-product-popular sp-products padding-tb-50
+sp-testimonial padding-tb-50
+sp-blog padding-tb-50
+sp-subscribe p-tb-50
